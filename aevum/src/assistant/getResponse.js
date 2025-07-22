@@ -18,7 +18,7 @@ function findRelevantMemories(userPrompt, memory) {
     return Array.from(relevantMemories);
 }
 
-export default async function getGemmaSimulatedResponse(userPrompt, memories) {
+export default async function getGemmaSimulatedResponse(userPrompt, memories, apiKey) {
     let chatHistory = [];
     let prompt = "";
     let relevantMemories = findRelevantMemories(userPrompt, memories);
@@ -36,7 +36,6 @@ export default async function getGemmaSimulatedResponse(userPrompt, memories) {
     chatHistory.push({ role: "user", parts: [{ text: prompt }] });
 
     const payload = { contents: chatHistory };
-    const apiKey = "api key placeholder"; // Replaced with actual API key
     const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
 
     try {
