@@ -9,7 +9,7 @@ import {
   TextInput
 } from 'react-native';
 
-import SwipeUpSettingsMenuClass from '../components/SwipeUpSettingsMenu/index';
+import SwipeUpSettingsMenuClass from '../components/swipeUpSettingsMenu/index';
 
 import {
   createMemory,

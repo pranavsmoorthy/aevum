@@ -10,6 +10,8 @@ import {
   Image
 } from 'react-native';
 
+import SettingsSwitch from '../settingsSwitch/index';
+
 import { styleJSON } from './style';
 
 const { height: screenHeight } = Dimensions.get('window');
@@ -102,38 +104,24 @@ class SwipeUpSettingsMenuClass extends Component {
           ]}
         >
           <View style={styles.settingsHeader}>
-            <Text style={styles.settingsTitle}>Settings w</Text>
+            <Text style={styles.settingsTitle}>Settings</Text>
             <TouchableOpacity
               onPress={this.closeMenu}
               style={styles.closeButton}
               accessibilityLabel="Close settings menu"
             >
-              {/* Using a simple Text 'X' for the close icon.
-                  For more advanced icons, consider 'react-native-vector-icons'. */}
-              <Text style={styles.closeButtonText}>X</Text>
+              <Text style={styles.closeButtonText}>Close</Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.settingsContent}>
-            <View style={styles.settingItemBlue}>
-              <Text style={styles.settingItemTitleBlue}>General Options</Text>
-              <Text style={styles.settingItemDescription}>Adjust application preferences.</Text>
-            </View>
-            <View style={styles.settingItemGreen}>
-              <Text style={styles.settingItemTitleGreen}>Account Settings</Text>
-              <Text style={styles.settingItemDescription}>Manage your profile and security.</Text>
-            </View>
-            <View style={styles.settingItemYellow}>
-              <Text style={styles.settingItemTitleYellow}>Notifications</Text>
-              <Text style={styles.settingItemDescription}>Configure alert preferences.</Text>
-            </View>
-            <View style={styles.settingItemPurple}>
-              <Text style={styles.settingItemTitlePurple}>Privacy Controls</Text>
-              <Text style={styles.settingItemDescription}>Manage your data and privacy.</Text>
-            </View>
-            <Text style={styles.aboutAppInfoHeader}>About This App</Text>
-            <Text style={styles.aboutAppInfoSubject}>App Version</Text>
-            <Text style={styles.aboutAppInfoSubject}>App Info</Text>
-          </View>
+          <SettingsSwitch label="Notifications" startVal={true} />
+          <SettingsSwitch label="Dark Mode" />
+          <SettingsSwitch label="AI Voice" />
+          <SettingsSwitch label="Something Else" startVal={true} />
+
+          <Text style={styles.aboutAppInfoHeader}>About App</Text>
+          <Text style={styles.aboutAppInfoSubject}>Version 1.0.0</Text>
+          <Text style={styles.aboutAppInfoSubject}>Made by Pranav Moorthy</Text>
+          <Text style={styles.aboutAppInfoSubject}> </Text>
         </Animated.View>
       </View>
     );
