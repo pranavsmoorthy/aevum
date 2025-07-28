@@ -7,7 +7,7 @@ export const styleJSON = (params) => { return {
         alignItems: 'center',
         justifyContent: 'flex-end',
         padding: 16, // p-4
-        width: '100%'
+        width: '100%',
     },
     card: {
         width: '100%',

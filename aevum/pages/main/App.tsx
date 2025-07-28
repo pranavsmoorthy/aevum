@@ -9,8 +9,8 @@ import {
   TextInput
 } from 'react-native';
 
-import SwipeUpSettingsMenuClass from '../components/swipeUpSettingsMenu/index';
-import InputBar from '../components/InputBar/index';
+import SwipeUpSettingsMenuClass from '../../components/swipeUpSettingsMenu/index';
+import InputBar from '../../components/InputBar/index';
 
 import {
   createMemory,
@@ -18,26 +18,20 @@ import {
   getMemoryById,
   updateMemory,
   deleteMemory,
-} from '../src/db/dbController';
+} from '../../src/db/dbController';
 
-import "../global.css"
+import { styleJSON } from './style.js';
+
+import "../../global.css"
+
+const styles = StyleSheet.create(styleJSON());
 
 export default function App() {
   return (
     <View style={styles.container}>
+      <Text style={styles.title}>aevum.</Text>
       <InputBar />
-      
       <SwipeUpSettingsMenuClass />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: 50,
-  },
-});
