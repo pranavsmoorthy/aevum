@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 
 import SwipeUpSettingsMenuClass from '../components/swipeUpSettingsMenu/index';
+import InputBar from '../components/InputBar/index';
 
 import {
   createMemory,
@@ -24,6 +25,8 @@ import "../global.css"
 export default function App() {
   return (
     <View style={styles.container}>
+      <InputBar />
+      
       <SwipeUpSettingsMenuClass />
     </View>
   );

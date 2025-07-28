@@ -7,7 +7,6 @@ import {
   PanResponder,
   Animated,
   Dimensions,
-  Image
 } from 'react-native';
 
 import SettingsSwitch from '../settingsSwitch/index';
