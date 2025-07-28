@@ -1,7 +1,9 @@
+import { assets } from "../../assets/assets"
+
 export const styleJSON = (params) => {return {
   container: {
     flex: 1,
-    backgroundColor: '#F3F4F6', // Tailwind's gray-100
+    backgroundColor: assets.basic.mediumGray, // Tailwind's gray-100
     alignItems: 'center',
     justifyContent: 'center',
     paddingLeft: 10,
@@ -19,7 +21,7 @@ export const styleJSON = (params) => {return {
   },
   switchLabel: {
     fontSize: 18, // Tailwind's text-lg
-    color: '#374151', // Tailwind's gray-700
+    color: assets.settingsSwitch.textColor, // Tailwind's gray-700
     fontFamily: "Raleway-Medium"
   },
 }}

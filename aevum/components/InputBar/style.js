@@ -32,16 +32,16 @@ export const styleJSON = (params) => { return {
         paddingHorizontal: 16, // px-4
         paddingVertical: 8, // py-2
         borderWidth: 1,
-        borderColor: assets.lightGray, // border-gray-300
+        borderColor: assets.basic.lightGray, // border-gray-300
         borderRadius: 9999, // rounded-full
         backgroundColor: 'white',
-        color: assets.darkGray, // text-gray-800
+        color: assets.basic.darkGray, // text-gray-800
         // Shadow for TextInput (similar to shadow-sm)
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 1 },
         shadowOpacity: 0.05,
         shadowRadius: 2,
-        fontFamily: assets.fonts.RALEWAY_REGULAR,
+        fontFamily: assets.basic.fonts.RALEWAY_REGULAR,
         elevation: 2,
         marginRight: 8, // space-x-2 (equivalent)
         width: 100
@@ -49,7 +49,7 @@ export const styleJSON = (params) => { return {
     },
     sendButton: {
         flexShrink: 0, // flex-shrink-0
-        backgroundColor: assets.blue, // bg-blue-600
+        backgroundColor: assets.basic.blue, // bg-blue-600
         borderColor: "#2f62b5ff",
         borderWidth: 1,
         padding: 8, // p-2
@@ -67,10 +67,10 @@ export const styleJSON = (params) => { return {
     currentInputText: {
         marginTop: 24, // mt-6
         textAlign: 'center',
-        color: assets.darkGray, // text-gray-600
+        color: assets.basic.darkGray, // text-gray-600
     },
     currentInputValue: {
         fontWeight: '600', // font-semibold
-        color: assets.blue, // text-blue-700
+        color: assets.basic.blue, // text-blue-700
     },
 }}

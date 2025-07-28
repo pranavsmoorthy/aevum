@@ -39,7 +39,7 @@ class InputBar extends Component {
                         <TextInput
                             style={styles.textInput}
                             placeholder="Type something here..."
-                            placeholderTextColor={assets.lightGray} // Tailwind's placeholder-gray-400
+                            placeholderTextColor={assets.basic.lightGray} // Tailwind's placeholder-gray-400
                             value={this.state.inputValue}
                             onChangeText={this.handleChange}
                             multiline // Allows multi-line input
@@ -47,7 +47,7 @@ class InputBar extends Component {
                             minHeight={48} // Equivalent to min-h-[48px]
                             maxHeight={150} // Equivalent to max-h-[150px]
                             accessibilityLabel="Text input field"
-                            cursorColor={assets.blue}
+                            cursorColor={assets.basic.blue}
                         />
 
                         <TouchableOpacity

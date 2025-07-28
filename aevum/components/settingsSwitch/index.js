@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Switch } from 'react-native'; // Import necessary React Native components
 
 import { styleJSON } from './styles';
+import { assets } from '../../assets/assets';
 
 const styles = StyleSheet.create(styleJSON());
 
@@ -23,7 +24,7 @@ class SettingsSwitch extends Component {
                 <View style={styles.switchRow}>
                     <Text style={styles.switchLabel}>{this.props.label}</Text>
                     <Switch
-                        trackColor={{ false: "#E0E0E0", true: "#3B82F6" }} // Tailwind's gray-300 and blue-600
+                        trackColor={{ false: assets.basic.lightGray, true: assets.basic.blue }} // Tailwind's gray-300 and blue-600
                         thumbColor={"#FFFFFF"} // Tailwind's white
                         onValueChange={this.handleToggle}
                         value={this.state.isSwitchOn}

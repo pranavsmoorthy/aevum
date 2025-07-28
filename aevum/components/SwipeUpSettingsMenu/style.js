@@ -1,3 +1,5 @@
+import { assets } from "../../assets/assets";
+
 export const styleJSON = (params) => {return {
   container: {
     flex: 1, // Takes up full screen height
@@ -38,15 +40,15 @@ export const styleJSON = (params) => {return {
     alignItems: 'center',
     padding: 20, // Equivalent to p-5
     borderBottomWidth: 1,
-    borderBottomColor: '#e5e7eb', // Equivalent to border-gray-200
+    borderBottomColor: assets.swipeUpMenu.borderBottomColor, // Equivalent to border-gray-200
     backgroundColor: '#ffffffff', // Equivalent to bg-gray-50
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
   },
   settingsTitle: {
     fontSize: 22, // Equivalent to text-2xl
-    color: '#333', // Equivalent to text-gray-800
-    fontFamily: "Raleway-Bold"
+    color: assets.swipeUpMenu.headerTextColor, // Equivalent to text-gray-800
+    fontFamily: assets.basic.fonts.RALEWAY_BOLD,
   },
   closeButton: {
     padding: 8, // Equivalent to p-2
@@ -55,31 +57,28 @@ export const styleJSON = (params) => {return {
   },
   closeButtonText: {
     fontSize: 15, // Adjusted size for 'X' to match lucide-react size
-    color: '#6b7280', // Equivalent to text-gray-500
-    fontFamily: "Raleway-Medium"
+    color: assets.basic.darkGray, // Equivalent to text-gray-500
+    fontFamily: assets.basic.fonts.RALEWAY_REGULAR,
   },
   settingsContent: {
     flex: 1,
     padding: 24, // Equivalent to p-6
     overflow: 'scroll', // Enable scrolling for long content
   },
-  settingItemDescription: {
-    color: '#4b5563', // Equivalent to text-gray-700
-  },
   aboutAppInfoHeader: {
-    color: '#2c3138ff',
+    color: assets.swipeUpMenu.appInfoHeaderColor,
     justifyContent: 'center',
     textAlign: 'center',
     fontFamily: "Raleway-Regular",
-    backgroundColor: '#F3F4F6', // Tailwind's gray-100
+    backgroundColor: assets.basic.mediumGray, // Tailwind's gray-100
 
   },
   aboutAppInfoSubject: {
-    color: '#4b5563',
+    color: assets.swipeUpMenu.appInfoSubjectColor,
     justifyContent: 'center',
     textAlign: 'center',
     fontSize: 11,
     fontFamily: "Raleway-Light",
-    backgroundColor: '#F3F4F6', // Tailwind's gray-100
+    backgroundColor: assets.basic.mediumGray, // Tailwind's gray-100
   }
 }};
