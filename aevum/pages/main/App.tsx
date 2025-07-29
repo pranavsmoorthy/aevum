@@ -8,6 +8,7 @@ import {
   FlatList,
   TextInput
 } from 'react-native';
+import PagerView from 'react-native-pager-view';
 
 import SwipeUpSettingsMenuClass from '../../components/swipeUpSettingsMenu/index';
 import InputBar from '../../components/InputBar/index';
@@ -21,6 +22,7 @@ import {
 } from '../../src/db/dbController';
 
 import { styleJSON } from './style.js';
+import assistantPage from '../assistantPage';
 
 import "../../global.css"
 
@@ -28,10 +30,14 @@ const styles = StyleSheet.create(styleJSON());
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>aevum.</Text>
-      <InputBar />
-      <SwipeUpSettingsMenuClass />
+    <View>
+        <PagerView style={{ height: '100%', width: '100%'}} initialPage={0}>
+            <View key='0'> {assistantPage()} </View>
+            <View style={styles.container} key='1'>
+                <Text style={styles.title}>second page tf u expect</Text>
+            </View>
+        </PagerView>
+        <SwipeUpSettingsMenuClass />
     </View>
   );
 }
