@@ -9,7 +9,7 @@ import {
   Dimensions,
 } from 'react-native';
 
-import SettingsSwitch from '../settingsSwitch/index';
+import SettingsSwitch from '../SettingsSwitch/index';
 
 import { styleJSON } from './style';
 
@@ -89,6 +89,7 @@ class SwipeUpSettingsMenuClass extends Component {
     return (
       <View style={styles.container}>
         {/* Swipe Up Area Trigger */}
+        <View style={styles.overlay} />
         <View
           // Apply panHandlers to the swipe area
           {...this.panResponder.panHandlers}

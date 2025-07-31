@@ -17,6 +17,7 @@ export const assets = {
             RALEWAY_SEMIBOLD_ITALIC: "Raleway-SemiBoldItalic",
             RALEWAY_THIN: "Raleway-Thin",
             RALEWAY_THIN_ITALIC: "Raleway-ThinItalic",
+            COMFORTAA_MEDIUM: "Comfortaa-Medium"
         },
         blue: "#3B82F6",
         lightGray: "#E0E0E0",
@@ -31,5 +32,10 @@ export const assets = {
         borderBottomColor: "#e5e7eb",
         appInfoHeaderColor: "#2c3138ff",
         appInfoSubjectColor: "#4b5563"
+    },
+    memoryPage: {
+        xbuttonColor: "#4b5563",
+        cardBorderColor: "#e5e7eb",
+        textColor: "#374151",
     }
 }

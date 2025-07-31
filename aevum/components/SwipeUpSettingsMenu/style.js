@@ -4,7 +4,7 @@ export const styleJSON = (params) => {return {
   container: {
     flex: 1, // Takes up full screen height
     width: '100%',
-    backgroundColor: 'transparent', // Equivalent to bg-gray-100
+    backgroundColor: 'black',
   },
   swipeUpArea: {
     width: '100%',
@@ -13,7 +13,7 @@ export const styleJSON = (params) => {return {
     left: 0,
     right: 0,
     height: 64, // Equivalent to h-16
-    backgroundColor: 'transparent',
+    backgroundColor: 'transparent', // No background color
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -80,5 +80,12 @@ export const styleJSON = (params) => {return {
     fontSize: 11,
     fontFamily: "Raleway-Light",
     backgroundColor: assets.basic.mediumGray, // Tailwind's gray-100
-  }
+  },
+  overlay: {
+    position: 'absolute',
+    backgroundColor: 'black',
+    zIndex: 50,
+    width: '100%',
+    height: '100%',
+  },
 }};

@@ -18,7 +18,7 @@ const styles = StyleSheet.create(styleJSON());
 
 export default function assistantPage() {
   return (
-    <View style={styles.container} key='0'>
+    <View style={styles.container}>
         <Text style={styles.title}>aevum.</Text>
         <InputBar />
     </View>

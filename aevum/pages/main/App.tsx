@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import PagerView from 'react-native-pager-view';
 
-import SwipeUpSettingsMenuClass from '../../components/swipeUpSettingsMenu/index';
+import SwipeUpSettingsMenuClass from '../../components/SwipeUpSettingsMenu/index';
 import InputBar from '../../components/InputBar/index';
 
 import {
@@ -23,6 +23,7 @@ import {
 
 import { styleJSON } from './style.js';
 import assistantPage from '../assistantPage';
+import memoryPage from '../memoryPage';
 
 import "../../global.css"
 
@@ -33,9 +34,7 @@ export default function App() {
     <View>
         <PagerView style={{ height: '100%', width: '100%'}} initialPage={0}>
             <View key='0'> {assistantPage()} </View>
-            <View style={styles.container} key='1'>
-                <Text style={styles.title}>second page tf u expect</Text>
-            </View>
+            <View key='1'> {memoryPage()} </View>
         </PagerView>
         <SwipeUpSettingsMenuClass />
     </View>
