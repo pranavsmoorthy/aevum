@@ -23,7 +23,7 @@ export const styleJSON = (params) => {return {
     bottom: 0,
     left: 0,
     right: 0,
-    height: params.screenHeight * 0.6, // 80% of screen height
+    height: params.screenHeight * 0.95, // 80% of screen height
     backgroundColor: 'white',
     borderTopLeftRadius: 24, // Equivalent to rounded-t-3xl
     borderTopRightRadius: 24,
@@ -64,6 +64,7 @@ export const styleJSON = (params) => {return {
     flex: 1,
     padding: 24, // Equivalent to p-6
     overflow: 'scroll', // Enable scrolling for long content
+    justifyContent: 'flex-start',
   },
   aboutAppInfoHeader: {
     color: assets.swipeUpMenu.appInfoHeaderColor,
@@ -80,12 +81,5 @@ export const styleJSON = (params) => {return {
     fontSize: 11,
     fontFamily: "Raleway-Light",
     backgroundColor: assets.basic.mediumGray, // Tailwind's gray-100
-  },
-  overlay: {
-    position: 'absolute',
-    backgroundColor: 'black',
-    zIndex: 50,
-    width: '100%',
-    height: '100%',
   },
 }};

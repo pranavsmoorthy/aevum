@@ -23,7 +23,7 @@ class SwipeUpSettingsMenuClass extends Component {
     };
 
     // Animated value for menu position
-    this.menuPosition = new Animated.Value(screenHeight * 0.8); // Start hidden (80% of screen height from top)
+    this.menuPosition = new Animated.Value(screenHeight * 0.95); // Start hidden (80% of screen height from top)
 
     this.startY = 0;
     this.isSwiping = false; // Flag to track if a swipe is in progress
@@ -74,7 +74,7 @@ class SwipeUpSettingsMenuClass extends Component {
     // If menu was open and is now closed, animate it down
     if (prevState.menuOpen && !this.state.menuOpen) {
       Animated.timing(this.menuPosition, {
-        toValue: screenHeight * 0.8, // Slide down to hidden position
+        toValue: screenHeight * 0.95, // Slide down to hidden position
         duration: 300,
         useNativeDriver: true,
       }).start();
@@ -89,7 +89,6 @@ class SwipeUpSettingsMenuClass extends Component {
     return (
       <View style={styles.container}>
         {/* Swipe Up Area Trigger */}
-        <View style={styles.overlay} />
         <View
           // Apply panHandlers to the swipe area
           {...this.panResponder.panHandlers}
@@ -116,6 +115,8 @@ class SwipeUpSettingsMenuClass extends Component {
           <SettingsSwitch label="Notifications" startVal={true} />
           <SettingsSwitch label="Dark Mode" />
           <SettingsSwitch label="AI Voice" />
+          <SettingsSwitch label="Something Else" startVal={true} />
+          <SettingsSwitch label="Something Else" startVal={true} />
           <SettingsSwitch label="Something Else" startVal={true} />
 
           <Text style={styles.aboutAppInfoHeader}>About App</Text>

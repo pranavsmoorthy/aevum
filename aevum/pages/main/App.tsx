@@ -1,24 +1,24 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { use, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import {
-  StyleSheet,
-  Text,
-  View,
-  Button,
-  FlatList,
-  TextInput
+    StyleSheet,
+    Text,
+    View,
+    Button,
+    FlatList,
+    TextInput,
 } from 'react-native';
 import PagerView from 'react-native-pager-view';
 
 import SwipeUpSettingsMenuClass from '../../components/SwipeUpSettingsMenu/index';
-import InputBar from '../../components/InputBar/index';
+import * as NavigationBar from 'expo-navigation-bar';
 
 import {
-  createMemory,
-  getAllMemories,
-  getMemoryById,
-  updateMemory,
-  deleteMemory,
+    createMemory,
+    getAllMemories,
+    getMemoryById,
+    updateMemory,
+    deleteMemory,
 } from '../../src/db/dbController';
 
 import { styleJSON } from './style.js';
@@ -30,13 +30,16 @@ import "../../global.css"
 const styles = StyleSheet.create(styleJSON());
 
 export default function App() {
-  return (
-    <View>
-        <PagerView style={{ height: '100%', width: '100%'}} initialPage={0}>
-            <View key='0'> {assistantPage()} </View>
-            <View key='1'> {memoryPage()} </View>
-        </PagerView>
-        <SwipeUpSettingsMenuClass />
-    </View>
-  );
+    useEffect(() => {
+        NavigationBar.setBackgroundColorAsync('#333333');
+    }, [])
+    return (
+        <View>
+            <PagerView style={{ height: '100%', width: '100%' }} initialPage={0}>
+                <View key='0'> {assistantPage()} </View>
+                <View key='1'> {memoryPage()} </View>
+            </PagerView>
+                <SwipeUpSettingsMenuClass />
+        </View>
+    );
 }

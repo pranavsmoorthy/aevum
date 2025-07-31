@@ -20,6 +20,7 @@ export const styleJSON = (params) => { return {
         shadowRadius: 6,
         elevation: 8, // For Android shadow
         padding: 17, // p-6
+        marginBottom: -10, // mb-4
     },
     formContainer: {
         flexDirection: 'row', // sm:flex-row

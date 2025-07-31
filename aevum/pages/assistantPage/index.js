@@ -6,7 +6,8 @@ import {
   View,
   Button,
   FlatList,
-  TextInput
+  TextInput,
+  KeyboardAvoidingView
 } from 'react-native';
 
 
@@ -20,7 +21,9 @@ export default function assistantPage() {
   return (
     <View style={styles.container}>
         <Text style={styles.title}>aevum.</Text>
-        <InputBar />
+        <KeyboardAvoidingView style={{width: '100%', height: '100%'}} behavior="padding">
+          <InputBar />
+        </KeyboardAvoidingView>
     </View>
   );
 }
