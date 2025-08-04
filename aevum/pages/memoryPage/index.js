@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import { getAllMemories } from '../../src/db/dbController';
+import { getAllMemories, createMemory } from '../../src/db/dbController';
 
 import { styleJSON } from './style.js';
 
@@ -29,6 +29,13 @@ export default function memoryPage() {
       fetchMemories();
   }, []);
 
+  const handleAddMemory = async () => {
+    await createMemory("New Memory", 2023);
+    const updatedMemories = await getAllMemories();
+    setMemories(updatedMemories);
+    console.log("Memory added");
+  }
+
   return (
     <ScrollView style={{ flex: 1, backgroundColor: '#fff' }}>
       <View style={styles.container}>
@@ -40,7 +47,13 @@ export default function memoryPage() {
         }}>
           <Text style={styles.title}>Memories</Text>
           <TouchableOpacity
-              onPress={console.log("Closed")}
+              onPress={async() => {
+                try{
+                  await handleAddMemory();
+                } catch (error) {
+                  console.error("Error adding memory:", error);
+                }
+              }}
               style={styles.closeIcon}
               accessibilityLabel="Add"
           >

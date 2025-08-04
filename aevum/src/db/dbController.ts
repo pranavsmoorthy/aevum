@@ -1,11 +1,11 @@
 import { memoryCollection } from './data'
 import Memory from './data/memory'
 
-export async function createMemory(description: string, year?: number | null) {
+export async function createMemory(description: string, year: number) {
     return memoryCollection.database.write(async () => {
         return memoryCollection.create(memory => {
             memory.description = description
-            memory.year = year ?? null
+            memory.year = year
         })
     })
 }
