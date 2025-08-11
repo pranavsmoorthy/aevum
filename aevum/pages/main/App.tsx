@@ -24,23 +24,41 @@ import {
 import { styleJSON } from './style.js';
 import assistantPage from '../assistantPage';
 import memoryPage from '../memoryPage';
+import addMemoryPage from '../addMemoryPage';
 
 import "../../global.css"
 
 const styles = StyleSheet.create(styleJSON());
 
 export default function App() {
+    const [currentPage, setCurrentPage] = useState(0);
+    const [refreshTrigger, setRefreshTrigger] = useState(0);
+
     useEffect(() => {
         NavigationBar.setBackgroundColorAsync('#333333');
-    }, [])
+    }, []);
+
+    const handlePageSelected = (e: any) => {
+        const newPage = e.nativeEvent.position;
+        setCurrentPage(newPage);
+
+        if (newPage === 1) {
+            setRefreshTrigger(prev => prev + 1);
+        }
+    };
+
     return (
         <View>
-            <PagerView style={{ height: '100%', width: '100%' }} initialPage={0}>
+            <PagerView
+                style={{ height: '100%', width: '100%' }}
+                initialPage={0}
+                onPageSelected={handlePageSelected}
+            >
                 <View key='0'> {assistantPage()} </View>
-                <View key='1'> {memoryPage()} </View>
-                <View key='2'> Add page </View>
+                <View key='1'> {memoryPage({ refreshTrigger })} </View>
+                <View key='2'> {addMemoryPage()} </View>
             </PagerView>
-                <SwipeUpSettingsMenuClass />
+            <SwipeUpSettingsMenuClass />
         </View>
     );
 }

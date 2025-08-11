@@ -1,6 +1,6 @@
 import { assets } from "../../assets/assets"
 
-export const styleJSON = (params) => { return {
+export const styleJSON = (params) => ({
     container: {
         flex: 1,
         backgroundColor: 'transparent',
@@ -14,56 +14,40 @@ export const styleJSON = (params) => { return {
         maxWidth: 448, // max-w-md (approx 448px for 28rem)
         backgroundColor: 'white',
         borderRadius: 15, // rounded-full
+        borderWidth: 1,
+        borderColor: assets.basic.lightGray, // border-gray-200
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 4 }, // shadow-xl (approx)
         shadowOpacity: 0.1,
         shadowRadius: 6,
-        elevation: 8, // For Android shadow
         padding: 17, // p-6
-        marginBottom: -10, // mb-4
+        marginBottom: 10, // mb-4
     },
     formContainer: {
-        flexDirection: 'row', // sm:flex-row
-        alignItems: 'center', // items-center
-        // space-x-2 is handled by margin on TextInput
-        // space-y-4 is handled by flex-col on smaller screens, but not directly applicable here
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: 8,
+        gap: 8,
     },
     textInput: {
-        flexGrow: 1, // flex-grow
-        paddingHorizontal: 16, // px-4
-        paddingVertical: 8, // py-2
+        flex: 1,
+        backgroundColor: '#f3f4f6',
+        borderRadius: 24,
+        paddingHorizontal: 16,
+        paddingVertical: 12,
+        height: 48, // Fixed height
+        justifyContent: 'center',
         borderWidth: 1,
-        borderColor: assets.basic.lightGray, // border-gray-300
-        borderRadius: 9999, // rounded-full
-        backgroundColor: 'white',
-        color: assets.basic.darkGray, // text-gray-800
-        // Shadow for TextInput (similar to shadow-sm)
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 1 },
-        shadowOpacity: 0.05,
-        shadowRadius: 2,
-        fontFamily: assets.basic.fonts.RALEWAY_REGULAR,
-        elevation: 2,
-        marginRight: 8, // space-x-2 (equivalent)
-        width: 100
-        // No direct focus styles in RN, but you can simulate with state
+        borderColor: assets.basic.lightGray,
+        fontFamily: assets.basic.fonts.RALEVAY_LIGHT,
     },
     sendButton: {
-        flexShrink: 0, // flex-shrink-0
-        backgroundColor: assets.basic.blue, // bg-blue-600
-        borderColor: "#2f62b5ff",
-        borderWidth: 1,
-        padding: 8, // p-2
-        borderRadius: 9999, // rounded-full
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 1 }, // shadow-lg (approx)
-        shadowOpacity: 0.1,
-        shadowRadius: 8,
-        elevation: 10, // For Android shadow
-        alignItems: 'center',
+        backgroundColor: '#3b82f6',
+        borderRadius: 24,
+        width: 48, // Make it square
+        height: 48, // Same height as textInput
         justifyContent: 'center',
-        width: 40, // w-10
-        height: 40, // h-10
+        alignItems: 'center',
     },
     currentInputText: {
         marginTop: 24, // mt-6
@@ -74,4 +58,4 @@ export const styleJSON = (params) => { return {
         fontWeight: '600', // font-semibold
         color: assets.basic.blue, // text-blue-700
     },
-}}
+})

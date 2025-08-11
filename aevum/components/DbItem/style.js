@@ -13,21 +13,20 @@ export const styleJSON = (params) => { return {
     },
     roundedBoxContainer: {
         position: 'relative', // for absolute positioning of elements if needed, though not strictly used for button here
-        backgroundColor: '#ffffff', // bg-white
+        backgroundColor: assets.basic.white, // bg-white
         padding: 24, // p-6
         borderRadius: 12, // rounded-xl
         shadowColor: '#000', // shadow-lg equivalent
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
         shadowRadius: 5,
-        elevation: 5, // for Android shadow
         maxWidth: 384, // max-w-sm (384px)
         width: '100%', // mx-auto equivalent for centering within parent
         flexDirection: 'column', // flex-col
         justifyContent: 'space-between', // justify-between
         // space-y-4 is handled by marginBottom on elements or padding on container
         borderWidth: 1, // border
-        borderColor: assets.memoryPage.cardBorderColor, // border-gray-200
+        borderColor: assets.basic.lightGray, // border-gray-200
         marginBottom: 30,
     },
     boxText: {

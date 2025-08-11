@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { use, useState } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import {
   StyleSheet,
   Text,
@@ -17,7 +18,7 @@ import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry.js';
 
 const styles = StyleSheet.create(styleJSON());
 
-export default function memoryPage() {
+export default function memoryPage({ refreshTrigger }) {
   const [memories, setMemories] = React.useState([]);
   console.log("Mem:", memories)
 
@@ -27,7 +28,7 @@ export default function memoryPage() {
       setMemories(fetchedMemories);
     };
     fetchMemories();
-  }, []);
+  }, [refreshTrigger]); // Re-run when refreshTrigger changes
 
   const handleAddMemory = async () => {
     await createMemory("New Memory", 2023);
@@ -46,35 +47,22 @@ export default function memoryPage() {
           paddingRight: 20,
         }}>
           <Text style={styles.title}>Memories</Text>
-          <TouchableOpacity
-            onPress={async () => {
-              try {
-                await handleAddMemory();
-              } catch (error) {
-                console.error("Error adding memory:", error);
-              }
-            }}
-            style={styles.closeIcon}
-            accessibilityLabel="Add"
-          >
-            <View style={styles.addContainer}>
-              <Text style={styles.addIcon}>+</Text>
-            </View>
-          </TouchableOpacity>
         </View>
-        {memories.map((memory, index) => (
-          <DbItem
-            key={index}
-            text={memory.description}
-            year={memory.year}
-            id={memory.id}
-            onRefresh={async() => {
-              const fetchedMemories = await getAllMemories();
-              setMemories(fetchedMemories);
-            }} // Add this line
-            onPress={() => console.log(`Memory ${index + 1} pressed`)}
-          />
-        ))}
+        {
+          [...memories].reverse().map((memory, index) => (
+            <DbItem
+              key={index}
+              text={memory.description}
+              year={memory.year}
+              id={memory.id}
+              onRefresh={async () => {
+                const fetchedMemories = await getAllMemories();
+                setMemories(fetchedMemories);
+              }} // Add this line
+              onPress={() => console.log(`Memory ${index + 1} pressed`)}
+            />
+          ))
+        }}
       </View>
     </ScrollView>
   );
