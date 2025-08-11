@@ -20,13 +20,13 @@ const styles = StyleSheet.create(styleJSON());
 export default function memoryPage() {
   const [memories, setMemories] = React.useState([]);
   console.log("Mem:", memories)
-  
+
   React.useEffect(() => {
-      const fetchMemories = async () => {
-          const fetchedMemories = await getAllMemories();
-          setMemories(fetchedMemories);
-      };
-      fetchMemories();
+    const fetchMemories = async () => {
+      const fetchedMemories = await getAllMemories();
+      setMemories(fetchedMemories);
+    };
+    fetchMemories();
   }, []);
 
   const handleAddMemory = async () => {
@@ -47,15 +47,15 @@ export default function memoryPage() {
         }}>
           <Text style={styles.title}>Memories</Text>
           <TouchableOpacity
-              onPress={async() => {
-                try{
-                  await handleAddMemory();
-                } catch (error) {
-                  console.error("Error adding memory:", error);
-                }
-              }}
-              style={styles.closeIcon}
-              accessibilityLabel="Add"
+            onPress={async () => {
+              try {
+                await handleAddMemory();
+              } catch (error) {
+                console.error("Error adding memory:", error);
+              }
+            }}
+            style={styles.closeIcon}
+            accessibilityLabel="Add"
           >
             <View style={styles.addContainer}>
               <Text style={styles.addIcon}>+</Text>
@@ -67,6 +67,11 @@ export default function memoryPage() {
             key={index}
             text={memory.description}
             year={memory.year}
+            id={memory.id}
+            onRefresh={async() => {
+              const fetchedMemories = await getAllMemories();
+              setMemories(fetchedMemories);
+            }} // Add this line
             onPress={() => console.log(`Memory ${index + 1} pressed`)}
           />
         ))}

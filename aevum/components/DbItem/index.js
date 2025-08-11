@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
+    View,
+    Text,
+    StyleSheet,
+    TouchableOpacity,
 } from 'react-native';
 
-import SettingsSwitch from '../SettingsSwitch/index';
+import { deleteMemory } from '../../src/db/dbController';
 
 import { styleJSON } from './style';
 
@@ -33,7 +33,16 @@ class DbItem extends Component {
 
                     {/* Close button positioned inside the box, aligned with the year */}
                     <TouchableOpacity
-                        onPress={console.log("Closed")}
+                        onPress={async () => {
+                            try {
+                                await deleteMemory(this.props.id);
+                                if (this.props.onRefresh) {
+                                    this.props.onRefresh();
+                                }
+                            } catch (error) {
+                                console.error('Error deleting memory:', error);
+                            }
+                        }}
                         style={styles.closeButton}
                         accessibilityLabel="Close"
                     >

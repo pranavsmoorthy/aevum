@@ -38,6 +38,7 @@ export default function App() {
             <PagerView style={{ height: '100%', width: '100%' }} initialPage={0}>
                 <View key='0'> {assistantPage()} </View>
                 <View key='1'> {memoryPage()} </View>
+                <View key='2'> Add page </View>
             </PagerView>
                 <SwipeUpSettingsMenuClass />
         </View>
