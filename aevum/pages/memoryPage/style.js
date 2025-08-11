@@ -38,4 +38,10 @@ export const styleJSON = (params) => { return {
         right: 15
         // self-end is not directly needed here as justify-between handles alignment
     },
+    noMemoryText: {
+        fontSize: 18,
+        color: '#888',
+        fontFamily: assets.basic.fonts.RALEVAY_LIGHT,
+        bottom: 10,
+    },
 }}

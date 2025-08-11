@@ -49,6 +49,15 @@ export default function memoryPage({ refreshTrigger }) {
           <Text style={styles.title}>Memories</Text>
         </View>
         {
+          memories.length === 0 ? (
+            <Text style={styles.noMemoryText}>
+              Start capturing your precious moments by swiping right and adding your first memory.
+              {'\n'} {'\n'}
+              Each memory you add becomes part of your personal timeline.
+              {'\n'} {'\n'}
+              The more memories you add, the richer your timeline becomes, and the better our assistant can help you.
+            </Text>
+          ) : (
           [...memories].reverse().map((memory, index) => (
             <DbItem
               key={index}
@@ -61,8 +70,8 @@ export default function memoryPage({ refreshTrigger }) {
               }} // Add this line
               onPress={() => console.log(`Memory ${index + 1} pressed`)}
             />
-          ))
-        }}
+          )))
+        }
       </View>
     </ScrollView>
   );
