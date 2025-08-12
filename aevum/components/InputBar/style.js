@@ -32,7 +32,7 @@ export const styleJSON = (params) => ({
     textInput: {
         flex: 1,
         backgroundColor: '#f3f4f6',
-        borderRadius: 24,
+        borderRadius: 10,
         paddingHorizontal: 16,
         paddingVertical: 12,
         height: 48, // Fixed height
@@ -40,6 +40,7 @@ export const styleJSON = (params) => ({
         borderWidth: 1,
         borderColor: assets.basic.lightGray,
         fontFamily: assets.basic.fonts.RALEVAY_LIGHT,
+        overflow: 'hidden'
     },
     sendButton: {
         backgroundColor: '#3b82f6',
@@ -53,6 +54,7 @@ export const styleJSON = (params) => ({
         marginTop: 24, // mt-6
         textAlign: 'center',
         color: assets.basic.darkGray, // text-gray-600
+        fontFamily: assets.basic.fonts.RALEVAY_LIGHT,
     },
     currentInputValue: {
         fontWeight: '600', // font-semibold

@@ -44,7 +44,8 @@ export const styleJSON = (params) => { return {
         marginTop: 8, // mt-2
     },
     yearContainer: {
-        padding: 8, // p-2
+        paddingLeft: 8, // p-2
+        paddingRight: 8,
         backgroundColor: assets.basic.blue, // bg-blue-50
         color: assets.basic.blue, // text-blue-700
         fontSize: 12, // text-xs
@@ -55,7 +56,6 @@ export const styleJSON = (params) => { return {
     yearText: {
         color: '#ffffff', // text-blue-700
         fontSize: 12, // text-xs
-        fontWeight: '600', // font-semibold
         fontFamily: assets.basic.fonts.RALEWAY_BOLD,
     },
     closeIcon: {
@@ -63,4 +63,8 @@ export const styleJSON = (params) => { return {
         color: assets.memoryPage.xbuttonColor, // text-gray-500
         fontFamily: assets.basic.fonts.COMFORTAA_MEDIUM
     },
+    roundedBoxContainerFocused: {
+        borderColor: assets.basic.blue, // Blue color
+        borderWidth: 2,
+    }
 }}

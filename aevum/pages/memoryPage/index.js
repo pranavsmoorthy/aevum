@@ -50,7 +50,16 @@ export default function memoryPage({ refreshTrigger }) {
         </View>
         {
           memories.length === 0 ? (
-            <Text style={styles.noMemoryText}>
+            null
+          ) : (
+          <Text style={styles.noMemoryText}>
+            Tap on a memory to view or edit its details.
+          </Text>
+        )}
+        {
+          memories.length === 0 ? (
+            <Text style={
+              styles.noMemoryText}>
               Start capturing your precious moments by swiping right and adding your first memory.
               {'\n'} {'\n'}
               Each memory you add becomes part of your personal timeline.

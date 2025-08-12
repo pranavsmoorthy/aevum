@@ -17,7 +17,7 @@ export const styleJSON = (params) => { return {
         position: "flex",
         fontFamily: assets.basic.fonts.RALEWAY_BOLD,
         color: assets.basic.blue,
-        marginBottom: 30,
+        marginBottom: 10,
         width: "100%",
     },
     addIcon: {
@@ -43,5 +43,6 @@ export const styleJSON = (params) => { return {
         color: '#888',
         fontFamily: assets.basic.fonts.RALEVAY_LIGHT,
         bottom: 10,
+        marginBottom: 25,
     },
 }}
