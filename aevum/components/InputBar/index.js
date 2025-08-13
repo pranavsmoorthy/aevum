@@ -28,6 +28,7 @@ class InputBar extends Component {
     }
 
     handleSubmit = () => {
+        this.props.onSubmit(this.state.inputValue);
         console.log("Input valeu:", this.state.inputValue);
     }
 
