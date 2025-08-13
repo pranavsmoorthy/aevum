@@ -7,12 +7,15 @@ import {
     TextInput
 } from 'react-native';
 
-import { deleteMemory } from '../../src/db/dbController';
+import { deleteMemory, updateMemory } from '../../src/db/dbController';
 import { styleJSON } from './style';
 
 class DbItem extends Component {
     state = {
-        isFocused: false
+        isFocused: false,
+        description: this.props.text || '',
+        year: this.props.year || '',
+        yearError: false,
     };
 
     render() {
@@ -27,7 +30,19 @@ class DbItem extends Component {
                     style={styles.boxText}
                     multiline={true}
                     onFocus={() => this.setState({ isFocused: true })}
-                    onBlur={() => this.setState({ isFocused: false })}
+                    onBlur={async() => {
+                        this.setState({ isFocused: false })
+                        await updateMemory(this.props.id, {
+                            description: this.state.description,
+                        });
+                        if (this.props.onRefresh) {
+                            this.props.onRefresh();
+                        }
+                    }}
+                    onChangeText={(text) => {
+                        this.setState({ description: text });
+                        console.log(text)
+                    }}
                 >
                     {this.props.text}
                 </TextInput>
@@ -40,9 +55,32 @@ class DbItem extends Component {
                             <TextInput 
                                 style={styles.yearText}
                                 onFocus={() => this.setState({ isFocused: true })}
-                                onBlur={() => this.setState({ isFocused: false })}
+                                onBlur={async() => {
+                                    this.setState({ isFocused: false })
+
+                                    const yearNum = parseInt(this.state.year);
+                                    const date = new Date().getFullYear();
+
+                                    if (isNaN(yearNum) || yearNum < 1900 || yearNum > date) {
+                                        this.setState({ yearError: true });
+                                        return;
+                                    }
+
+                                    await updateMemory(this.props.id, {
+                                        year: this.state.year,
+                                    });
+                                    if (this.props.onRefresh) {
+                                        this.props.onRefresh();
+                                    }
+                                }}
+                                onChangeText={(text) => {
+                                    this.setState({ year: +text });
+                                    console.log(text)
+                                }}
                                 keyboardType="numeric"
-                            > {this.props.year} </TextInput>
+                            > 
+                                {this.props.year} 
+                            </TextInput>
                         </View>
                     )}
 
@@ -65,6 +103,10 @@ class DbItem extends Component {
                         <Text style={styles.closeIcon}>×</Text>
                     </TouchableOpacity>
                 </View>
+                {this.state.yearError ?
+                    (<Text style={styles.errorText}>Please enter a valid year</Text>)
+                    : null
+                }
             </View>
         )
     }

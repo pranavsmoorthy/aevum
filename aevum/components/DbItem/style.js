@@ -66,5 +66,12 @@ export const styleJSON = (params) => { return {
     roundedBoxContainerFocused: {
         borderColor: assets.basic.blue, // Blue color
         borderWidth: 2,
-    }
+    },
+    errorText: {
+        color: '#ff8282ff', // text-gray-700
+        fontSize: 15, // text-base
+        //flexGrow: 1, // flex-grow
+        marginTop: 10, // Added margin to separate from bottom row
+        fontFamily: assets.basic.fonts.RALEWAY_BOLD,
+    },
 }}
