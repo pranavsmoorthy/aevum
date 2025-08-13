@@ -1,12 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { use, useState } from 'react';
-import { useFocusEffect } from '@react-navigation/native';
 import {
   StyleSheet,
   Text,
   View,
   ScrollView,
   TouchableOpacity,
+  TextInput,
 } from 'react-native';
 
 import { getAllMemories, createMemory } from '../../src/db/dbController';
@@ -20,7 +20,18 @@ const styles = StyleSheet.create(styleJSON());
 
 export default function memoryPage({ refreshTrigger }) {
   const [memories, setMemories] = React.useState([]);
-  console.log("Mem:", memories)
+  const [searchQuery, setSearchQuery] = React.useState('');
+
+  // Filter memories based on search query
+  const filteredMemories = React.useMemo(() => {
+    return memories.filter(memory => {
+      const searchLower = searchQuery.toLowerCase();
+      return (
+        memory.description.toLowerCase().includes(searchLower) ||
+        memory.year.toString().includes(searchQuery)
+      );
+    });
+  }, [memories, searchQuery]);
 
   React.useEffect(() => {
     const fetchMemories = async () => {
@@ -48,26 +59,43 @@ export default function memoryPage({ refreshTrigger }) {
         }}>
           <Text style={styles.title}>Memories</Text>
         </View>
+        
         {
-          memories.length === 0 ? (
-            null
-          ) : (
+          memories.length >= 5 ? 
+          (<View style={styles.searchContainer}>
+            <TextInput
+              style={styles.searchBar}
+              placeholder="Search memories..."
+              placeholderTextColor="#888"
+              value={searchQuery}
+              onChangeText={setSearchQuery}
+            />
+            {searchQuery.length > 0 && (
+              <TouchableOpacity
+                style={styles.clearButton}
+                onPress={() => setSearchQuery('')}
+              >
+                <Text style={styles.clearButtonText}>×</Text>
+              </TouchableOpacity>
+            )}
+          </View>) : null
+        }
+
+        {/* Use filteredMemories instead of memories */}
+        {filteredMemories.length === 0 && memories.length > 0 ? (
           <Text style={styles.noMemoryText}>
-            Tap on a memory to view or edit its details.
+            No memories found matching your search.
           </Text>
-        )}
-        {
-          memories.length === 0 ? (
-            <Text style={
-              styles.noMemoryText}>
-              Start capturing your precious moments by swiping right and adding your first memory.
-              {'\n'} {'\n'}
-              Each memory you add becomes part of your personal timeline.
-              {'\n'} {'\n'}
-              The more memories you add, the richer your timeline becomes, and the better our assistant can help you.
-            </Text>
-          ) : (
-          [...memories].reverse().map((memory, index) => (
+        ) : memories.length === 0 ? (
+          <Text style={styles.noMemoryText}>
+            Start capturing your precious moments by swiping right and adding your first memory.
+            {'\n'} {'\n'}
+            Each memory you add becomes part of your personal timeline.
+            {'\n'} {'\n'}
+            The more memories you add, the richer your timeline becomes, and the better our assistant can help you.
+          </Text>
+        ) : (
+          [...filteredMemories].reverse().map((memory, index) => (
             <DbItem
               key={index}
               text={memory.description}
@@ -76,11 +104,11 @@ export default function memoryPage({ refreshTrigger }) {
               onRefresh={async () => {
                 const fetchedMemories = await getAllMemories();
                 setMemories(fetchedMemories);
-              }} // Add this line
+              }}
               onPress={() => console.log(`Memory ${index + 1} pressed`)}
             />
-          )))
-        }
+          ))
+        )}
       </View>
     </ScrollView>
   );
