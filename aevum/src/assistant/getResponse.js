@@ -1,5 +1,16 @@
 function extractKeywords(prompt) {
-    return prompt.toLowerCase().split(/\s+/).filter(word => word.length > 2 && !['is', 'what', 'my', 'your', 'a', 'an', 'the', 'how', 'when', 'where', 'why', 'who'].includes(word));
+    let arr = prompt.toLowerCase()
+        .split(/\s+/)
+        .filter(word => 
+            word.length > 2 && 
+            !['is', 'what', 'my', 'your', 'a', 'an', 'the', 'how', 'when', 'where', 'why', 'who']
+        .includes(word));
+
+    let keywords = []
+    arr.forEach(word => {
+        keywords.push(word.replace(/[^a-zA-Z0-9]/g, '')); // Remove non-alphanumeric characters
+    })
+    return keywords;
 }
 
 function findRelevantMemories(userPrompt, memory) {

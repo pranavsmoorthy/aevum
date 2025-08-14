@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import PagerView from 'react-native-pager-view';
 
-import SwipeUpSettingsMenuClass from '../../components/SwipeUpSettingsMenu/index';
 import * as NavigationBar from 'expo-navigation-bar';
 
 import {
@@ -58,7 +57,6 @@ export default function App() {
                 <View key='1'> {memoryPage({ refreshTrigger })} </View>
                 <View key='2'> {addMemoryPage()} </View>
             </PagerView>
-            <SwipeUpSettingsMenuClass />
         </View>
     );
 }
