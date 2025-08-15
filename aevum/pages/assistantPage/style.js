@@ -19,16 +19,15 @@ export const styleJSON = (params) => { return {
     },
     responseContainer: {
         flex: 1,
-        height: '30%',
+        height: 'auto',
         width: '90%',
         backgroundColor: assets.basic.white, // Tailwind's gray-200
         borderWidth: 1,
         borderColor: assets.basic.lightGray, // Tailwind's gray-300
         borderRadius: 10,
-
         padding: 10,
         position: "absolute",
-        marginBottom: 150,
+        top: 50
     },
     responseText: {
         color: assets.memoryPage.textColor, // text-gray-700
