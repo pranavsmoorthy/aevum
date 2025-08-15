@@ -1,4 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
+import NetInfo from '@react-native-community/netinfo';
 import React, { use, useEffect, useState } from 'react';
 import {
     StyleSheet,
@@ -34,6 +35,7 @@ export default function App() {
     const [refreshTrigger, setRefreshTrigger] = useState(0);
 
     useEffect(() => {
+        console.log("netinfo", NetInfo.fetch())
         NavigationBar.setBackgroundColorAsync('#333333');
     }, []);
 
