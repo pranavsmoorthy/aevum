@@ -4,9 +4,11 @@ import {
     TextInput,
     StyleSheet,
     TouchableOpacity,
-    KeyboardAvoidingView,
+    Dimensions,
+    Keyboard
 } from 'react-native';
 import Svg, { Path } from 'react-native-svg'; 
+import { StatusBar } from 'react-native';
 
 import { styleJSON } from './style';
 import { assets } from '../../assets/assets';
@@ -17,9 +19,20 @@ class InputBar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            inputValue: ''
+            inputValue: '',
+            isKeyboardVisible: false
         }
     }
+
+    
+    keyboardDidShowListener = Keyboard.addListener(
+        'keyboardDidShow',
+        () => this.setState({"isKeyboardVisible": true}),
+    );
+    keyboardDidHideListener = Keyboard.addListener(
+        'keyboardDidHide',
+        () => this.setState({"isKeyboardVisible": false}),
+    );
 
     handleChange = (text) => {
         this.setState({
@@ -35,7 +48,9 @@ class InputBar extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.card}>
+                <View style={[styles.card, {
+                    //marginBottom: 
+                }]}>
                     <View style={styles.formContainer}>
                         <TextInput
                             style={styles.textInput}

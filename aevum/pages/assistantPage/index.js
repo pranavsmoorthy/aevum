@@ -4,8 +4,9 @@ import {
   Text,
   View,
   Animated,
-  KeyboardAvoidingView
+  Image
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import getGemmaSimulatedResponse from '../../src/assistant/getResponse.js';
 import { getAllMemories } from '../../src/db/dbController';
 
@@ -64,27 +65,27 @@ export default function assistantPage() {
   }, []);
 
   return (
-    <View style={styles.container}>
-      {
-        inputEdited ? 
-        (
-          <View style={styles.responseContainer}>
-            <Text style={styles.responseHeader}>Response</Text>
-            <Text style={styles.responseText}>
-              {response}
-            </Text>
-          </View>
-        ) 
-        : 
-        (
-          <Animated.View style={{opacity: fadeAnim, width: '100%', alignItems: 'center', justifyContent: 'center', flex: 1}}>
-            <Text style={styles.title}>aevum.</Text>
-          </Animated.View>
-        )
-      }
-      <KeyboardAvoidingView style={{width: '100%', height: '100%', bottom: '40'}} behavior="padding">
+      <KeyboardAwareScrollView contentContainerStyle={styles.container}>
+        {
+          inputEdited ?
+            (
+              <View style={styles.responseContainer}>
+                <Text style={styles.responseHeader}>Response</Text>
+                <Text style={styles.responseText}>
+                  {response}
+                </Text>
+              </View>
+            )
+            :
+            (
+              <Animated.View style={{ opacity: fadeAnim, width: '100%', alignItems: 'center', justifyContent: 'center', flex: 1, marginTop: 50 }}>
+                <Image source={require('../../assets/images/icon-transparent.png')} style={{ width: 150, height: 150, marginTop: 130 }} />
+                <Text style={styles.title}>aevum.</Text>
+              </Animated.View>
+            )
+        }
         <InputBar onSubmit={handleInputChange} />
-      </KeyboardAvoidingView>
-    </View>
+      </KeyboardAwareScrollView>
   );
 }
+

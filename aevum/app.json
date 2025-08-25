@@ -21,11 +21,15 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.anonymous.aevum"
+      "package": "com.anonymous.aevum",
+      "softwareKeyboardLayoutMode": "pan"
     },
     "web": {
       "favicon": "./assets/images/icon.png"
     },
-    "plugins": []
+    "plugins": [],
+    "androidNavigationBar": {
+      "visible": "sticky-immersive"
+    }
   }
 }

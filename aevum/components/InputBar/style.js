@@ -21,8 +21,7 @@ export const styleJSON = (params) => ({
         shadowOpacity: 0.1,
         shadowRadius: 6,
         padding: 17, // p-6
-        marginBottom: 10, // mb-4
-        position: 'absolute',
+        marginBottom: 56
     },
     formContainer: {
         flexDirection: 'row',
