@@ -20,19 +20,26 @@ class InputBar extends Component {
         super(props);
         this.state = {
             inputValue: '',
-            isKeyboardVisible: false
+            isKeyboardVisible: false,
+            keyboardHeight: 0
         }
     }
-
     
-    keyboardDidShowListener = Keyboard.addListener(
-        'keyboardDidShow',
-        () => this.setState({"isKeyboardVisible": true}),
-    );
-    keyboardDidHideListener = Keyboard.addListener(
-        'keyboardDidHide',
-        () => this.setState({"isKeyboardVisible": false}),
-    );
+    componentDidMount() {
+        this.keyboardDidShowListener = Keyboard.addListener(
+            'keyboardDidShow',
+            (e) => this.setState({ isKeyboardVisible: true, keyboardHeight: e.endCoordinates.height })
+        );
+        this.keyboardDidHideListener = Keyboard.addListener(
+            'keyboardDidHide',
+            () => this.setState({ isKeyboardVisible: false, keyboardHeight: 0 })
+        );
+    }
+
+    componentWillUnmount() {
+        this.keyboardDidShowListener.remove();
+        this.keyboardDidHideListener.remove();
+    }
 
     handleChange = (text) => {
         this.setState({
@@ -47,7 +54,7 @@ class InputBar extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, { marginBottom: this.state.isKeyboardVisible ? this.state.keyboardHeight : 0 }]}>
                 <View style={[styles.card, {
                     //marginBottom: 
                 }]}>
