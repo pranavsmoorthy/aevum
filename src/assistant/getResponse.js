@@ -1,3 +1,5 @@
+import { GoogleGenAI } from "@google/genai";
+
 function extractKeywords(prompt) {
     let arr = prompt.toLowerCase()
         .split(/\s+/)
@@ -30,7 +32,6 @@ function findRelevantMemories(userPrompt, memory) {
 }
 
 export default async function getGemmaSimulatedResponse(userPrompt, memories, apiKey) {
-    let chatHistory = [];
     let prompt = "";
     let relevantMemories = findRelevantMemories(userPrompt, memories);
 
@@ -44,23 +45,17 @@ export default async function getGemmaSimulatedResponse(userPrompt, memories, ap
                 Response:`;
     }
 
-    chatHistory.push({ role: "user", parts: [{ text: prompt }] });
-
-    const payload = { contents: chatHistory };
-    const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-
+    const ai = new GoogleGenAI({ apiKey: apiKey })
+    
     try {
-        const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
+        const response = await ai.models.generateContent({
+            model: "gemma-3-27b-it",
+            contents: prompt,
         });
-        const result = await response.json();
 
-        if (result.candidates && result.candidates.length > 0 &&
-            result.candidates[0].content && result.candidates[0].content.parts &&
-            result.candidates[0].content.parts.length > 0) {
-            return result.candidates[0].content.parts[0].text;
+        if (response.candidates && response.candidates != 0) {
+            console.log(JSON.stringify(response.candidates));
+            return response.candidates[0].content.parts[0].text;
         } else {
             console.error("Unexpected API response structure:", result);
             return "Sorry, I couldn't generate a response. The AI model returned an unexpected result.";
