@@ -15,7 +15,13 @@ import { styleJSON } from './style.js';
 
 import DbItem from '../../components/DbItem/index.js';
 import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry.js';
+
 import { assets } from '../../assets/assets';
+
+const { SyncRedactor } = require("redact-pii-light");
+const redactor = new SyncRedactor({
+    globalReplaceWith: "•"
+})
 
 const styles = StyleSheet.create(styleJSON());
 
@@ -25,9 +31,12 @@ export default function addMemoryPage() {
   const [showSuccess, setShowSuccess] = React.useState(false);
   const [showEmptyFailure, setShowEmptyFailure] = React.useState(false);
   const [showDateFailure, setShowDateFailure] = React.useState(false);
+  const [showPIIFailure, setShowPIIFailure] = React.useState(false);
 
   const handleAddMemory = async () => {
     try {
+      let descriptionRedact;
+
       if (!description || !year) {
         setShowEmptyFailure(true);
         setTimeout(() => {
@@ -44,6 +53,22 @@ export default function addMemoryPage() {
         setShowDateFailure(true);
         setTimeout(() => {
           setShowDateFailure(false);
+        }, 3000);
+        return;
+      }
+
+
+      descriptionRedact = description;
+            console.log(descriptionRedact)
+
+      descriptionRedact = redactor.redact(descriptionRedact);
+
+      console.log(descriptionRedact)
+
+      if(descriptionRedact.includes("•")) {
+        setShowPIIFailure(true);
+        setTimeout(() => {
+          setShowPIIFailure(false);
         }, 3000);
         return;
       }
@@ -121,6 +146,11 @@ export default function addMemoryPage() {
           {showEmptyFailure && (
             <View style={styles.message}>
               <Text style={styles.failureText}>Please fill both fields</Text>
+            </View>
+          )}
+          {showPIIFailure && (
+            <View style={styles.message}>
+              <Text style={styles.failureText}>This memory might have personally identifiable information!</Text>
             </View>
           )}
         </View>
