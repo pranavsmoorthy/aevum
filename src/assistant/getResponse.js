@@ -55,7 +55,7 @@ export default async function getGemmaSimulatedResponse(userPrompt, memories, ap
 
         if (response.candidates && response.candidates != 0) {
             console.log(JSON.stringify(response.candidates));
-            return response.candidates[0].content.parts[0].text;
+            return response.candidates[0].content.parts[0].text.trim();
         } else {
             console.error("Unexpected API response structure:", result);
             return "Sorry, I couldn't generate a response. The AI model returned an unexpected result.";

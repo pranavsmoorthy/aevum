@@ -13,7 +13,7 @@ export const styleJSON = (params) => { return {
         justifyContent: 'center',
         alignItems: 'center',
         position: "absolute",
-        top: 250,
+        top: 260,
         fontFamily: assets.basic.fonts.RALEWAY_BOLD,
         color: assets.basic.blue,
     },

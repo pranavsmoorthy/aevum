@@ -79,7 +79,7 @@ export default function assistantPage() {
             :
             (
               <Animated.View style={{ opacity: fadeAnim, width: '100%', alignItems: 'center', justifyContent: 'center', flex: 1, marginTop: 50 }}>
-                <Image source={require('../../assets/images/icon-transparent.png')} style={{ width: 150, height: 150, marginTop: 130 }} />
+                <Image source={require('../../assets/images/icon-transparent.png')} style={{ width: 150, height: 150, marginTop: 130, marginBottom: 1 }} />
                 <Text style={styles.title}>aevum.</Text>
               </Animated.View>
             )
