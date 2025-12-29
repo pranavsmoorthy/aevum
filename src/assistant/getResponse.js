@@ -32,6 +32,9 @@ function findRelevantMemories(userPrompt, memory) {
 }
 
 export default async function getGemmaSimulatedResponse(userPrompt, memories, apiKey) {
+    console.log("getGemmaSimulatedResponse called with userPrompt:", userPrompt);
+    console.log("memories:", memories);
+    console.log("apiKey:", apiKey);
     let prompt = "";
     let relevantMemories = findRelevantMemories(userPrompt, memories);
 
@@ -44,6 +47,8 @@ export default async function getGemmaSimulatedResponse(userPrompt, memories, ap
         prompt = `The user asked: "${userPrompt}". I do not have specific memories related to this topic. Please respond by stating that you don't have information on this topic in your memory.
                 Response:`;
     }
+
+    console.log("Constructed prompt:", prompt);
 
     const ai = new GoogleGenAI({ apiKey: apiKey })
     

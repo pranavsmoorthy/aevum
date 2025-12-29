@@ -28,9 +28,12 @@ export default function assistantPage() {
   const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
   const handleInputChange = async(prompt) => {
+    console.log("handleInputChange called with prompt:", prompt);
+    console.log(prompt.length)
+    if(prompt.length == 0) return;
     if(responseLoading) return; // Prevent multiple submissions while loading
 
-    setResponse("");
+    setResponse("Loading...");
     setResponseLoading(true);
     fadeAnim.setValue(0); // Reset opacity to 0 for new input
     console.log(fadeAnim)
@@ -46,6 +49,7 @@ export default function assistantPage() {
     let gemmaResponse = await getGemmaSimulatedResponse(prompt, editedMemories, key);
     console.log("Gemma response:", gemmaResponse);
 
+    setResponse(""); // Clear "Loading..." message
     for(let char of gemmaResponse) {
       setResponse(prev => prev + char);
       await delay(15)
