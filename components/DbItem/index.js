@@ -1,119 +1,45 @@
-import React, { Component } from 'react';
-import {
-    View,
-    Text,
-    StyleSheet,
-    TouchableOpacity,
-    TextInput
-} from 'react-native';
-
-import { deleteMemory, updateMemory } from '../../src/db/dbController';
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { deleteMemory } from '../../src/db/dbController';
 import { styleJSON } from './style';
+import { Calendar, Trash2 } from 'lucide-react-native';
+import { assets } from '../../assets/assets';
 
-class DbItem extends Component {
-    state = {
-        isFocused: false,
-        description: this.props.text || '',
-        year: this.props.year || '',
-        yearError: false,
-    };
+const DbItem = ({ id, text, year, onRefresh }) => {
+    // Logic to split description into title and content
+    const lines = text.split('\n');
+    const title = lines[0];
+    const content = lines.length > 1 ? lines.slice(1).join('\n') : '';
 
-    render() {
-        return (
-            // Container View for the rounded box, styled with StyleSheet
-            <View style={[
-                styles.roundedBoxContainer,
-                this.state.isFocused && styles.roundedBoxContainerFocused
-            ]}>
-                {/* Text content of the rounded box */}
-                <TextInput
-                    style={styles.boxText}
-                    multiline={true}
-                    onFocus={() => this.setState({ isFocused: true })}
-                    onBlur={async() => {
-                        this.setState({ isFocused: false })
-                        await updateMemory(this.props.id, {
-                            description: this.state.description,
-                        });
-                        if (this.props.onRefresh) {
-                            this.props.onRefresh();
+    return (
+        <View style={styles.card}>
+            <View style={styles.header}>
+                <View style={styles.dateContainer}>
+                    <Calendar size={14} color={assets.basic.blue} />
+                    <Text style={styles.dateText}>{year}</Text>
+                </View>
+                <TouchableOpacity
+                    onPress={async () => {
+                        try {
+                            await deleteMemory(id);
+                            if (onRefresh) {
+                                onRefresh();
+                            }
+                        } catch (error) {
+                            console.error('Error deleting memory:', error);
                         }
                     }}
-                    onChangeText={(text) => {
-                        this.setState({ description: text });
-                        console.log(text)
-                    }}
+                    style={styles.deleteButton}
                 >
-                    {this.props.text}
-                </TextInput>
-
-                {/* Container for the year and the close button, to align them horizontally */}
-                <View style={styles.bottomRow}>
-                    {/* Year section inside the box, below the text */}
-                    {this.props.year && ( // Only render if year prop is provided
-                        <View style={styles.yearContainer}>
-                            <TextInput 
-                                style={styles.yearText}
-                                onFocus={() => this.setState({ isFocused: true })}
-                                onBlur={async() => {
-                                    this.setState({ isFocused: false })
-
-                                    const yearNum = parseInt(this.state.year);
-                                    const date = new Date().getFullYear();
-
-                                    if (isNaN(yearNum) || yearNum < 1900 || yearNum > date) {
-                                        this.setState({ yearError: true });
-                                        return;
-                                    }
-
-                                    await updateMemory(this.props.id, {
-                                        year: this.state.year,
-                                    });
-                                    if (this.props.onRefresh) {
-                                        this.props.onRefresh();
-                                    }
-                                }}
-                                onChangeText={(text) => {
-                                    this.setState({ year: +text });
-                                    console.log(text)
-                                }}
-                                keyboardType="numeric"
-                            > 
-                                {this.props.year} 
-                            </TextInput>
-                        </View>
-                    )}
-
-                    {/* Close button positioned inside the box, aligned with the year */}
-                    <TouchableOpacity
-                        onPress={async () => {
-                            try {
-                                await deleteMemory(this.props.id);
-                                if (this.props.onRefresh) {
-                                    this.props.onRefresh();
-                                }
-                            } catch (error) {
-                                console.error('Error deleting memory:', error);
-                            }
-                        }}
-                        style={styles.closeButton}
-                        accessibilityLabel="Close"
-                    >
-                        {/* Using a simple Text 'X' for the icon, as lucide-react is web-specific */}
-                        <Text style={styles.closeIcon}>×</Text>
-                    </TouchableOpacity>
-                </View>
-                {this.state.yearError ?
-                    (<Text style={styles.errorText}>Please enter a valid year</Text>)
-                    : null
-                }
+                    <Trash2 size={16} color="#ef4444" />
+                </TouchableOpacity>
             </View>
-        )
-    }
-}
+            {title ? <Text style={styles.title}>{title}</Text> : null}
+            {content ? <Text style={styles.content}>{content}</Text> : <Text style={styles.content}>{title}</Text>}
+        </View>
+    );
+};
 
-const styles = StyleSheet.create({
-    ...styleJSON()
-});
+const styles = StyleSheet.create(styleJSON());
 
 export default DbItem;

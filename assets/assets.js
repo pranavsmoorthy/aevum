@@ -24,18 +24,7 @@ export const assets = {
         mediumGray: "#F3F4F6",
         darkGray: "#6b7280"
     },
-    settingsSwitch: {
-        textColor: "#374151"
-    },
-    swipeUpMenu: {
-        headerTextColor: "#333",
-        borderBottomColor: "#e5e7eb",
-        appInfoHeaderColor: "#2c3138ff",
-        appInfoSubjectColor: "#4b5563"
-    },
     memoryPage: {
-        xbuttonColor: "#4b5563",
-        cardBorderColor: "#e5e7eb",
         textColor: "#374151",
     }
 }

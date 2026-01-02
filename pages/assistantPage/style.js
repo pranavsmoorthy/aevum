@@ -1,45 +1,59 @@
 import { assets } from "../../assets/assets"
 
-export const styleJSON = (params) => { return {
+export const styleJSON = () => ({
     container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingTop: 50,
+        flexGrow: 1,
+        backgroundColor: assets.basic.mediumGray,
+        padding: 16,
+        paddingBottom: 24,
     },
-    title: {
-        fontSize: 60,
-        justifyContent: 'center',
-        alignItems: 'center',
-        position: "absolute",
-        top: 260,
-        fontFamily: assets.basic.fonts.RALEWAY_BOLD,
-        color: assets.basic.blue,
+    messageContainer: {
+        width: '100%',
+        flexDirection: 'row',
+        marginBottom: 12,
     },
-    responseContainer: {
-        flex: 1,
-        height: 'auto',
-        width: '90%',
-        backgroundColor: assets.basic.white, // Tailwind's gray-200
+    userMessageContainer: {
+        justifyContent: 'flex-end',
+    },
+    aiMessageContainer: {
+        justifyContent: 'flex-start',
+    },
+    messageBubble: {
+        maxWidth: '85%',
+        padding: 12,
+        borderRadius: 18,
+    },
+    userMessageBubble: {
+        backgroundColor: assets.basic.blue,
+        borderBottomRightRadius: 4,
+    },
+    aiMessageBubble: {
+        backgroundColor: 'white',
         borderWidth: 1,
-        borderColor: assets.basic.lightGray, // Tailwind's gray-300
-        borderRadius: 10,
-        padding: 10,
-        position: "absolute",
-        top: 50
+        borderColor: '#e5e7eb',
+        borderBottomLeftRadius: 4,
     },
-    responseText: {
-        color: assets.memoryPage.textColor, // text-gray-700
-        fontSize: 16, // text-base
-        //flexGrow: 1, // flex-grow
-        marginBottom: 16, // Added margin to separate from bottom row
-        fontFamily: assets.basic.fonts.RALEWAY_REGULAR,
+    aiMessageHeader: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 4,
+        marginBottom: 4,
     },
-    responseHeader: {
-        color: assets.basic.blue, // text-gray-700
-        fontSize: 26, // text-base
-        marginBottom: 5, // Added margin to separate from bottom row
+    aiHeaderText: {
+        fontSize: 10,
+        fontWeight: 'bold',
+        textTransform: 'uppercase',
+        color: assets.basic.blue,
         fontFamily: assets.basic.fonts.RALEWAY_BOLD,
     },
-}}
+    userMessageText: {
+        fontSize: 15,
+        color: 'white',
+        fontFamily: assets.basic.fonts.RALEVAY_LIGHT,
+    },
+    aiMessageText: {
+        fontSize: 15,
+        color: '#374151',
+        fontFamily: assets.basic.fonts.RALEVAY_LIGHT,
+    },
+});

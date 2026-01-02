@@ -1,7 +1,7 @@
 import { appSchema, tableSchema } from '@nozbe/watermelondb';
 
 export default appSchema({
-    version: 1,
+    version: 2,
     tables: [
         tableSchema({
             name: 'memories', 
@@ -10,6 +10,14 @@ export default appSchema({
                 { name: 'year', type: 'number', isOptional: true },
                 { name: 'created_at', type: 'number' },
                 { name: 'updated_at', type: 'number' },
+            ],
+        }),
+        tableSchema({
+            name: 'chat_messages',
+            columns: [
+                { name: 'sender', type: 'string' },
+                { name: 'text', type: 'string' },
+                { name: 'created_at', type: 'number' },
             ],
         }),
     ]

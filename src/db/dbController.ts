@@ -1,5 +1,6 @@
-import { memoryCollection } from './data'
+import { memoryCollection, chatMessageCollection } from './data'
 import Memory from './data/memory'
+import ChatMessage from './data/chatMessage'
 
 export async function createMemory(description: string, year: number) {
     return memoryCollection.database.write(async () => {
@@ -47,3 +48,17 @@ export async function deleteAllMemories() {
         }
     })
 }
+
+export async function createChatMessage(sender: 'user' | 'ai', text: string) {
+    return chatMessageCollection.database.write(async () => {
+        return chatMessageCollection.create(message => {
+            message.sender = sender
+            message.text = text
+        })
+    })
+}
+
+export async function getAllChatMessages(): Promise<ChatMessage[]> {
+    return chatMessageCollection.query().fetch()
+}
+

@@ -1,5 +1,4 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { use, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,23 +6,23 @@ import {
   ScrollView,
   TouchableOpacity,
   TextInput,
+  Platform,
 } from 'react-native';
+import { Clock } from 'lucide-react-native';
 
-import { getAllMemories, createMemory } from '../../src/db/dbController';
-
+import { getAllMemories } from '../../src/db/dbController';
 import { styleJSON } from './style.js';
-
 import DbItem from '../../components/DbItem/index.js';
-import { get } from 'react-native/Libraries/TurboModule/TurboModuleRegistry.js';
+import { assets } from '../../assets/assets';
 
 const styles = StyleSheet.create(styleJSON());
 
-export default function memoryPage({ refreshTrigger }) {
-  const [memories, setMemories] = React.useState([]);
-  const [searchQuery, setSearchQuery] = React.useState('');
+export default function MemoryPage({ refreshTrigger }) {
+  const [memories, setMemories] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
 
-  // Filter memories based on search query
-  const filteredMemories = React.useMemo(() => {
+  const filteredMemories = useMemo(() => {
+    if (!searchQuery) return memories;
     return memories.filter(memory => {
       const searchLower = searchQuery.toLowerCase();
       return (
@@ -33,40 +32,28 @@ export default function memoryPage({ refreshTrigger }) {
     });
   }, [memories, searchQuery]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchMemories = async () => {
       const fetchedMemories = await getAllMemories();
       setMemories(fetchedMemories);
     };
     fetchMemories();
-  }, [refreshTrigger]); // Re-run when refreshTrigger changes
+  }, [refreshTrigger]);
 
-  const handleAddMemory = async () => {
-    await createMemory("New Memory", 2023);
-    const updatedMemories = await getAllMemories();
-    setMemories(updatedMemories);
-    console.log("Memory added");
-  }
+  const fetchMemories = async () => {
+    const fetchedMemories = await getAllMemories();
+    setMemories(fetchedMemories);
+  };
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: '#fff' }}>
+    <ScrollView style={styles.scrollView}>
       <View style={styles.container}>
-        <View style={{
-          width: "100%",
-          flexDirection: "row",
-          justifyContent: "space-between",
-          paddingRight: 20,
-        }}>
-          <Text style={styles.title}>Memories</Text>
-        </View>
-        
-        {
-          memories.length >= 5 ? 
-          (<View style={styles.searchContainer}>
+        {memories.length > 0 && (
+          <View style={styles.searchContainer}>
             <TextInput
               style={styles.searchBar}
               placeholder="Search memories..."
-              placeholderTextColor="#888"
+              placeholderTextColor="#9ca3af"
               value={searchQuery}
               onChangeText={setSearchQuery}
             />
@@ -78,34 +65,26 @@ export default function memoryPage({ refreshTrigger }) {
                 <Text style={styles.clearButtonText}>×</Text>
               </TouchableOpacity>
             )}
-          </View>) : null
-        }
+          </View>
+        )}
 
-        {/* Use filteredMemories instead of memories */}
-        {filteredMemories.length === 0 && memories.length > 0 ? (
-          <Text style={styles.noMemoryText}>
-            No memories found matching your search.
-          </Text>
-        ) : memories.length === 0 ? (
-          <Text style={styles.noMemoryText}>
-            Start capturing your precious moments by swiping right and adding your first memory.
-            {'\n'} {'\n'}
-            Each memory you add becomes part of your personal timeline.
-            {'\n'} {'\n'}
-            The more memories you add, the richer your timeline becomes, and the better our assistant can help you.
-          </Text>
+        {filteredMemories.length === 0 ? (
+          <View style={styles.noMemoryContainer}>
+            <Clock size={48} color="#d1d5db" />
+            <Text style={styles.noMemoryText}>
+              {memories.length > 0
+                ? "No memories found matching your search."
+                : "No memories recorded yet."}
+            </Text>
+          </View>
         ) : (
-          [...filteredMemories].reverse().map((memory, index) => (
+          [...filteredMemories].reverse().map((memory) => (
             <DbItem
-              key={index}
+              key={memory.id}
               text={memory.description}
               year={memory.year}
               id={memory.id}
-              onRefresh={async () => {
-                const fetchedMemories = await getAllMemories();
-                setMemories(fetchedMemories);
-              }}
-              onPress={() => console.log(`Memory ${index + 1} pressed`)}
+              onRefresh={fetchMemories}
             />
           ))
         )}

@@ -1,59 +1,82 @@
-import { StatusBar } from 'expo-status-bar';
-import NetInfo from '@react-native-community/netinfo';
-import React, { use, useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     StyleSheet,
     View,
-    ScrollView,
-    Keyboard
+    Text,
+    TouchableOpacity,
+    Platform
 } from 'react-native';
-import PagerView from 'react-native-pager-view';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
+import { Plus } from 'lucide-react-native';
 import * as NavigationBar from 'expo-navigation-bar';
 
+import AssistantPage from '../assistantPage';
+import MemoryPage from '../memoryPage';
+import AddMemoryModal from '../../components/AddMemoryModal';
+import NavBar from '../../components/NavBar';
+import { assets } from '../../assets/assets';
 import { styleJSON } from './style.js';
-import assistantPage from '../assistantPage';
-import memoryPage from '../memoryPage';
-import addMemoryPage from '../addMemoryPage';
 
 import "../../global.css"
 
-const styles = StyleSheet.create(styleJSON());
+const appStyles = StyleSheet.create(styleJSON());
 
 export default function App() {
-    const [currentPage, setCurrentPage] = useState(0);
+    const [activeTab, setActiveTab] = useState('chat'); // 'memories' or 'chat'
+    const [showAddModal, setShowAddModal] = useState(false);
     const [refreshTrigger, setRefreshTrigger] = useState(0);
-    const [isKeyboardVisible, setKeyboardVisible] = useState(false);
 
     useEffect(() => {
-        console.log("netinfo", NetInfo.fetch())
-        NavigationBar.setBackgroundColorAsync('#333333');
+        if (Platform.OS === 'android') {
+            NavigationBar.setBackgroundColorAsync('#ffffff');
+            NavigationBar.setButtonStyleAsync('dark');
+        }
     }, []);
 
-    const handlePageSelected = (e: any) => {
-        const newPage = e.nativeEvent.position;
-        setCurrentPage(newPage);
-
-        if (newPage === 1) {
+    const handleTabChange = (tab: string) => {
+        setActiveTab(tab);
+        if (tab === 'memories') {
             setRefreshTrigger(prev => prev + 1);
         }
-    };
+    }
+
+    const memories = 0;
 
     return (
-        <View style={{ flex: 1 }}>
-            <PagerView
-                style={{ 
-                    height: '100%', 
-                    width: '100%', 
-                 }}
-                initialPage={0}
-                onPageSelected={handlePageSelected}
-            >
-                <View key='0'> {assistantPage()} </View>
-                <View key='1'> {memoryPage({ refreshTrigger })} </View>
-                <View key='2'> {addMemoryPage()} </View>
-            </PagerView>
+        <View style={{ flex: 1, backgroundColor: assets.basic.mediumGray }}>
+            <View style={appStyles.header}>
+                <View>
+                    <Text style={appStyles.headerTitle}>
+                        {activeTab === 'memories' ? 'Timeline' : 'aevum AI'}
+                    </Text>
+                    <Text style={appStyles.headerSubtitle}>
+                        {activeTab === 'memories' ? memories + ` memories stored` : 'Ask about your past'}
+                    </Text>
+                </View>
+                {activeTab === 'memories' && (
+                    <TouchableOpacity
+                        onPress={() => setShowAddModal(true)}
+                        style={appStyles.addButton}
+                    >
+                        <Plus size={20} color={assets.basic.blue} />
+                    </TouchableOpacity>
+                )}
+            </View>
+
+            <View style={{ flex: 1 }}>
+                {activeTab === 'chat' && <AssistantPage />}
+                {activeTab === 'memories' && <MemoryPage refreshTrigger={refreshTrigger} />}
+            </View>
+
+            <NavBar activeTab={activeTab} onTabChange={handleTabChange} />
+
+            {showAddModal && <AddMemoryModal 
+                onClose={() => setShowAddModal(false)}
+                onAdd={() => {
+                    setRefreshTrigger(prev => prev + 1);
+                }}
+            />}
         </View>
     );
 }
+
+

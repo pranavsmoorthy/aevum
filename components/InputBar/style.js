@@ -1,63 +1,37 @@
 import { assets } from "../../assets/assets"
+import { Platform } from 'react-native';
 
-export const styleJSON = (params) => ({
+export const styleJSON = () => ({
     container: {
-        flex: 1,
-        backgroundColor: 'transparent',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        padding: 16, // p-4
-        width: '100%',
-    },
-    card: {
-        width: '100%',
-        maxWidth: 448, // max-w-md (approx 448px for 28rem)
+        padding: 16,
         backgroundColor: 'white',
-        borderRadius: 15, // rounded-full
-        borderWidth: 1,
-        borderColor: assets.basic.lightGray, // border-gray-200
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 4 }, // shadow-xl (approx)
-        shadowOpacity: 0.1,
-        shadowRadius: 6,
-        padding: 17, // p-6
-        marginBottom: 56
+        borderTopWidth: 1,
+        borderColor: '#e5e7eb',
     },
-    formContainer: {
+    inputContainer: {
         flexDirection: 'row',
         alignItems: 'center',
-        padding: 8,
-        gap: 8,
+        position: 'relative',
     },
     textInput: {
         flex: 1,
         backgroundColor: '#f3f4f6',
-        borderRadius: 10,
-        paddingHorizontal: 16,
-        paddingVertical: 12,
-        height: 48, // Fixed height
-        justifyContent: 'center',
-        borderWidth: 1,
-        borderColor: assets.basic.lightGray,
+        borderRadius: 22,
+        paddingLeft: 20,
+        paddingRight: 50,
+        height: 44,
+        fontSize: 16,
+        color: '#1f2937',
         fontFamily: assets.basic.fonts.RALEVAY_LIGHT,
-        overflow: 'hidden'
     },
     sendButton: {
-        backgroundColor: '#3b82f6',
-        borderRadius: 24,
-        width: 48, // Make it square
-        height: 48, // Same height as textInput
+        position: 'absolute',
+        right: 4,
+        backgroundColor: assets.basic.blue,
+        borderRadius: 20,
+        width: 36,
+        height: 36,
         justifyContent: 'center',
         alignItems: 'center',
     },
-    currentInputText: {
-        marginTop: 24, // mt-6
-        textAlign: 'center',
-        color: assets.basic.darkGray, // text-gray-600
-        fontFamily: assets.basic.fonts.RALEVAY_LIGHT,
-    },
-    currentInputValue: {
-        fontWeight: '600', // font-semibold
-        color: assets.basic.blue, // text-blue-700
-    },
-})
+});
