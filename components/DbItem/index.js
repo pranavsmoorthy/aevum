@@ -5,13 +5,15 @@ import { styleJSON } from './style';
 import { Calendar, Trash2 } from 'lucide-react-native';
 import { assets } from '../../assets/assets';
 
-const DbItem = ({ id, title, text, year, onRefresh }) => {
+const DbItem = ({ id, title, text, year, date, onRefresh }) => {
+    const displayDate = date ? new Date(date).toLocaleDateString() : year;
+
     return (
         <View style={styles.card}>
             <View style={styles.header}>
                 <View style={styles.dateContainer}>
                     <Calendar size={14} color={assets.basic.main} />
-                    <Text style={styles.dateText}>{year}</Text>
+                    <Text style={styles.dateText}>{displayDate}</Text>
                 </View>
                 <TouchableOpacity
                     onPress={async () => {

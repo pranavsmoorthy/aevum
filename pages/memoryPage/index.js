@@ -25,10 +25,12 @@ export default function MemoryPage({ refreshTrigger }) {
     if (!searchQuery) return memories;
     return memories.filter(memory => {
       const searchLower = searchQuery.toLowerCase();
+      const memoryDate = memory.date ? new Date(memory.date).toLocaleDateString() : '';
       return (
         (memory.title && memory.title.toLowerCase().includes(searchLower)) ||
         memory.description.toLowerCase().includes(searchLower) ||
-        memory.year.toString().includes(searchQuery)
+        (memory.year && memory.year.toString().includes(searchQuery)) ||
+        (memoryDate && memoryDate.includes(searchLower))
       );
     });
   }, [memories, searchQuery]);
@@ -85,6 +87,7 @@ export default function MemoryPage({ refreshTrigger }) {
               title={memory.title}
               text={memory.description}
               year={memory.year}
+              date={memory.date}
               id={memory.id}
               onRefresh={fetchMemories}
             />

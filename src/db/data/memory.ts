@@ -6,5 +6,6 @@ export default class Memory extends Model {
 
   @field('title') title?: string
   @field('description') description!: string
-  @field('year') year!: number | null
+  @field('year') year?: number | null
+  @field('date') date!: number
 }

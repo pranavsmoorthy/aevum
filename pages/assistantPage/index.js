@@ -48,7 +48,8 @@ export default function AssistantPage() {
     setLoading(true);
 
     const memories = await getAllMemories();
-    const editedMemories = memories.map(m => `${m.description} This happened on ${m.year}`);
+    console.log(memories)
+    const editedMemories = memories.map(m => `${m.description} This happened on ${new Date(m.date).toLocaleDateString()}`);
     
     const gemmaResponse = await getGemmaSimulatedResponse(prompt, editedMemories, key);
     

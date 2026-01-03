@@ -23,13 +23,18 @@ export const styleJSON = () => ({
         fontWeight: '500',
         marginTop: 4,
         fontFamily: assets.basic.fonts.RALEWAY_MEDIUM,
-        marginBottom: 40
+        marginBottom: 30
     },
     navTextAevum: {
         fontSize: 12.5,
         fontWeight: '500',
         marginTop: 4,
         fontFamily: assets.basic.fonts.RALEWAY_BOLD,
-        marginBottom: 40
+        marginBottom: 36
+    },
+    aevumImage: {
+        width: 50,
+        height: 50,
+        marginBottom: -10
     }
 });

@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Platform } from 'react-native';
-import { Brain, Clock, Settings } from 'lucide-react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
+import { Clock, Settings } from 'lucide-react-native';
 import { assets } from '../../assets/assets';
 import { styleJSON } from './style.js';
 
@@ -23,7 +23,7 @@ const NavBar = ({ activeTab, onTabChange }) => {
                 onPress={() => onTabChange('chat')}
                 style={styles.navButton}
             >
-                <Brain size={25} color={activeTab === 'chat' ? assets.basic.main : assets.basic.darkGray} />
+                <Image source={activeTab === 'chat' ? require("../../assets/images/icon.png") : require("../../assets/images/icon-grayed.png")} style={styles.aevumImage}/>
                 <Text style={[styles.navTextAevum, { color: activeTab === 'chat' ? assets.basic.main : assets.basic.darkGray }]}>
                     aevum
                 </Text>

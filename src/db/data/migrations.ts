@@ -25,6 +25,17 @@ export default schemaMigrations({
                     ]
                 })
             ]
+        },
+        {
+            toVersion: 4,
+            steps: [
+                addColumns({
+                    table: 'memories',
+                    columns: [
+                        { name: 'date', type: 'number' },
+                    ]
+                })
+            ]
         }
     ],
 })

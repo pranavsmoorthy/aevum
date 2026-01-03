@@ -5,10 +5,10 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  Dimensions,
-  Platform
+  Platform,
 } from 'react-native';
 import { X } from 'lucide-react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { createMemory } from '../../src/db/dbController';
 import { assets } from '../../assets/assets';
 import { styleJSON } from './style.js';
@@ -23,19 +23,13 @@ const styles = StyleSheet.create(styleJSON());
 const AddMemoryModal = ({ onClose, onAdd }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [year, setYear] = useState('');
+  const [date, setDate] = useState(new Date());
+  const [showDatePicker, setShowDatePicker] = useState(false);
   const [error, setError] = useState('');
 
   const handleAddMemory = async () => {
-    if (!description.trim() || !year.trim()) {
-      setError('Please fill out all fields.');
-      return;
-    }
-    
-    const yearNum = parseInt(year);
-    const currentYear = new Date().getFullYear();
-    if (isNaN(yearNum) || yearNum < 1900 || yearNum > currentYear) {
-      setError('Please enter a valid year.');
+    if (!description.trim()) {
+      setError('Please fill out the description.');
       return;
     }
 
@@ -46,13 +40,19 @@ const AddMemoryModal = ({ onClose, onAdd }) => {
     }
 
     try {
-      await createMemory(description, yearNum, title);
+      await createMemory(description, date.getTime(), title);
       onAdd();
       onClose();
     } catch (e) {
       setError('Failed to save memory.');
       console.error(e);
     }
+  };
+
+  const onDateChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+    setShowDatePicker(Platform.OS === 'ios');
+    setDate(currentDate);
   };
 
   return (
@@ -84,14 +84,21 @@ const AddMemoryModal = ({ onClose, onAdd }) => {
             textAlignVertical="top"
           />
 
-          <Text style={styles.label}>Year</Text>
-          <TextInput
-            style={styles.input}
-            placeholder="e.g., 2023"
-            value={year}
-            onChangeText={setYear}
-            keyboardType="numeric"
-          />
+          <Text style={styles.label}>Date</Text>
+          <TouchableOpacity onPress={() => setShowDatePicker(true)} style={styles.input}>
+            <Text style={{color: "black"}}>{date.toLocaleDateString()}</Text>
+          </TouchableOpacity>
+
+          {showDatePicker && (
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={date}
+              mode="date"
+              is24Hour={true}
+              display="default"
+              onChange={onDateChange}
+            />
+          )}
 
           {error ? <Text style={styles.errorText}>{error}</Text> : null}
 
@@ -103,6 +110,5 @@ const AddMemoryModal = ({ onClose, onAdd }) => {
     </View>
   );
 };
-
 
 export default AddMemoryModal;
