@@ -30,7 +30,7 @@ const NavBar = ({ activeTab, onTabChange }) => {
             </TouchableOpacity>
 
             <TouchableOpacity
-                onPress={() => onTabChange('chat')}
+                onPress={() => onTabChange('settings')}
                 style={styles.navButton}
             >
                 <Settings size={20} color={activeTab === 'settings' ? assets.basic.main : assets.basic.darkGray} />

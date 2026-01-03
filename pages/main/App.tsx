@@ -12,6 +12,7 @@ import { getAllMemories } from '../../src/db/dbController';
 
 import AssistantPage from '../assistantPage';
 import MemoryPage from '../memoryPage';
+import SettingsPage from '../settingsPage';
 import AddMemoryModal from '../../components/AddMemoryModal';
 import NavBar from '../../components/NavBar';
 import { assets } from '../../assets/assets';
@@ -23,7 +24,7 @@ import GradientText from '../../components/GradientText';
 const appStyles = StyleSheet.create(styleJSON());
 
 export default function App() {
-    const [activeTab, setActiveTab] = useState('chat'); // 'memories' or 'chat'
+    const [activeTab, setActiveTab] = useState('chat'); // 'memories', 'chat', or 'settings'
     const [showAddModal, setShowAddModal] = useState(false);
     const [refreshTrigger, setRefreshTrigger] = useState(0);
     const [memoriesCount, setMemoriesCount] = useState(0);
@@ -57,10 +58,10 @@ export default function App() {
             <View style={appStyles.header}>
                 <View>
                     <GradientText style={appStyles.headerTitle}>
-                        {activeTab === 'memories' ? 'Timeline' : 'aevum'}
+                        {activeTab === 'memories' ? 'Timeline' : activeTab === 'chat' ? 'aevum' : 'Settings'}
                     </GradientText>
                     <Text style={appStyles.headerSubtitle}>
-                        {activeTab === 'memories' ? memoriesCount + ` memories stored` : 'Ask about your past'}
+                        {activeTab === 'memories' ? memoriesCount + ` memories stored` : activeTab === 'chat' ? 'Ask about your past' : 'Manage your preferences'}
                     </Text>
                 </View>
                 {activeTab === 'memories' && (
@@ -76,6 +77,7 @@ export default function App() {
             <View style={{ flex: 1 }}>
                 {activeTab === 'chat' && <AssistantPage />}
                 {activeTab === 'memories' && <MemoryPage refreshTrigger={refreshTrigger} />}
+                {activeTab === 'settings' && <SettingsPage onMemoriesCleared={() => setRefreshTrigger(prev => prev + 1)} />}
             </View>
 
             <NavBar activeTab={activeTab} onTabChange={handleTabChange} />

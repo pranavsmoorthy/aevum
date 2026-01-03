@@ -63,3 +63,13 @@ export async function createChatMessage(sender: 'user' | 'ai', text: string) {
 export async function getAllChatMessages(): Promise<ChatMessage[]> {
     return chatMessageCollection.query().fetch()
 }
+
+export async function deleteAllChatMessages() {
+    return chatMessageCollection.database.write(async () => {
+        const chatMessages = await chatMessageCollection.query().fetch()
+        for (const chatMessage of chatMessages) {
+            await chatMessage.markAsDeleted()
+            await chatMessage.destroyPermanently()
+        }
+    })
+}

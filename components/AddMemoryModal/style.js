@@ -34,7 +34,7 @@ export const styleJSON = () => ({
     title: {
         fontSize: 24,
         fonteight: 'bold',
-        color: '#1f2937',
+        color: assets.basic.main,
         fontFamily: assets.basic.fonts.RALEWAY_BOLD,
     },
     closeButton: {
@@ -70,11 +70,14 @@ export const styleJSON = () => ({
         borderRadius: 8,
         alignItems: 'center',
         marginTop: 8,
+        shadowColor: '#007AFF',
+        shadowOffset: { width: 0, height: 50 },
+        shadowOpacity: 0.8,
+        shadowRadius: 15
     },
     saveButtonText: {
         color: 'white',
         fontSize: 16,
-        fontWeight: 'bold',
         fontFamily: assets.basic.fonts.RALEWAY_BOLD,
     },
     errorText: {
