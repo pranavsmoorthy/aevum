@@ -1,4 +1,4 @@
-import { schemaMigrations, createTable } from '@nozbe/watermelondb/Schema/migrations'
+import { schemaMigrations, createTable, addColumns } from '@nozbe/watermelondb/Schema/migrations'
 
 export default schemaMigrations({
     migrations: [
@@ -11,6 +11,17 @@ export default schemaMigrations({
                         { name: 'sender', type: 'string' },
                         { name: 'text', type: 'string' },
                         { name: 'created_at', type: 'number' },
+                    ]
+                })
+            ]
+        },
+        {
+            toVersion: 3,
+            steps: [
+                addColumns({
+                    table: 'memories',
+                    columns: [
+                        { name: 'title', type: 'string', isOptional: true },
                     ]
                 })
             ]

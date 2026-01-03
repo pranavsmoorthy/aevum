@@ -97,8 +97,8 @@ export default function AssistantPage() {
             >
               {msg.sender === 'ai' && (
                 <View style={styles.aiMessageHeader}>
-                  <Brain size={12} color={assets.basic.blue} />
-                  <Text style={styles.aiHeaderText}>AI Assistant</Text>
+                  <Brain size={12} color={assets.basic.main} />
+                  <Text style={styles.aiHeaderText}>aevum</Text>
                 </View>
               )}
               <Text style={msg.sender === 'user' ? styles.userMessageText : styles.aiMessageText}>

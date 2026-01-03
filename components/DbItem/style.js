@@ -27,17 +27,14 @@ export const styleJSON = () => ({
         gap: 6,
     },
     dateText: {
-        color: assets.basic.blue,
+        color: assets.basic.main,
         fontSize: 12,
-        fontWeight: '600',
-        fontFamily: assets.basic.fonts.RALEWAY_SEMIBOLD,
     },
     deleteButton: {
         padding: 4,
     },
     title: {
         fontSize: 18,
-        fontWeight: 'bold',
         color: '#1e293b',
         marginBottom: 4,
         fontFamily: assets.basic.fonts.RALEWAY_BOLD,
@@ -46,6 +43,6 @@ export const styleJSON = () => ({
         fontSize: 14,
         color: '#475569',
         lineHeight: 20,
-        fontFamily: assets.basic.fonts.RALEVAY_LIGHT,
+        fontFamily: assets.basic.fonts.RALEWAY_LIGHT,
     },
 });

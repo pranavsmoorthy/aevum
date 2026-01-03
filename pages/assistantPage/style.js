@@ -24,7 +24,7 @@ export const styleJSON = () => ({
         borderRadius: 18,
     },
     userMessageBubble: {
-        backgroundColor: assets.basic.blue,
+        backgroundColor: assets.basic.main,
         borderBottomRightRadius: 4,
     },
     aiMessageBubble: {
@@ -43,17 +43,17 @@ export const styleJSON = () => ({
         fontSize: 10,
         fontWeight: 'bold',
         textTransform: 'uppercase',
-        color: assets.basic.blue,
+        color: assets.basic.main,
         fontFamily: assets.basic.fonts.RALEWAY_BOLD,
     },
     userMessageText: {
         fontSize: 15,
         color: 'white',
-        fontFamily: assets.basic.fonts.RALEVAY_LIGHT,
+        fontFamily: assets.basic.fonts.RALEWAY_LIGHT,
     },
     aiMessageText: {
         fontSize: 15,
         color: '#374151',
-        fontFamily: assets.basic.fonts.RALEVAY_LIGHT,
+        fontFamily: assets.basic.fonts.RALEWAY_LIGHT,
     },
 });

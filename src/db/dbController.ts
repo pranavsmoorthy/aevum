@@ -2,9 +2,10 @@ import { memoryCollection, chatMessageCollection } from './data'
 import Memory from './data/memory'
 import ChatMessage from './data/chatMessage'
 
-export async function createMemory(description: string, year: number) {
+export async function createMemory(description: string, year: number, title?: string) {
     return memoryCollection.database.write(async () => {
         return memoryCollection.create(memory => {
+            if (title) memory.title = title
             memory.description = description
             memory.year = year
         })
@@ -20,10 +21,11 @@ export async function getMemoryById(id: string): Promise<Memory | null> {
     return memory
 }
 
-export async function updateMemory(id: string, updates: { description?: string, year?: number | null }) {
+export async function updateMemory(id: string, updates: { title?: string, description?: string, year?: number | null }) {
     return memoryCollection.database.write(async () => {
         const memory = await memoryCollection.find(id)
         await memory.update(m => {
+            if (updates.title !== undefined) m.title = updates.title
             if (updates.description !== undefined) m.description = updates.description
             if (updates.year !== undefined) m.year = updates.year
         })
@@ -61,4 +63,3 @@ export async function createChatMessage(sender: 'user' | 'ai', text: string) {
 export async function getAllChatMessages(): Promise<ChatMessage[]> {
     return chatMessageCollection.query().fetch()
 }
-

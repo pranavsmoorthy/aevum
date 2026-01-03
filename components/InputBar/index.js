@@ -35,7 +35,7 @@ const InputBar = ({ onSubmit }) => {
                     onSubmitEditing={handleSubmit} // Allows submitting with keyboard return key
                     returnKeyType="send"
                     blurOnSubmit={false}
-                    cursorColor={assets.basic.blue}
+                    cursorColor={assets.basic.main}
                 />
                 <TouchableOpacity
                     style={styles.sendButton}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Platform } from 'react-native';
-import { Brain, Clock } from 'lucide-react-native';
+import { Brain, Clock, Settings } from 'lucide-react-native';
 import { assets } from '../../assets/assets';
 import { styleJSON } from './style.js';
 
@@ -13,9 +13,9 @@ const NavBar = ({ activeTab, onTabChange }) => {
                 onPress={() => onTabChange('memories')}
                 style={styles.navButton}
             >
-                <Clock size={20} color={activeTab === 'memories' ? assets.basic.blue : assets.basic.darkGray} />
-                <Text style={[styles.navText, { color: activeTab === 'memories' ? assets.basic.blue : assets.basic.darkGray }]}>
-                    Memories
+                <Clock size={20} color={activeTab === 'memories' ? assets.basic.main : assets.basic.darkGray} />
+                <Text style={[styles.navText, { color: activeTab === 'memories' ? assets.basic.main : assets.basic.darkGray }]}>
+                    memories
                 </Text>
             </TouchableOpacity>
 
@@ -23,9 +23,19 @@ const NavBar = ({ activeTab, onTabChange }) => {
                 onPress={() => onTabChange('chat')}
                 style={styles.navButton}
             >
-                <Brain size={20} color={activeTab === 'chat' ? assets.basic.blue : assets.basic.darkGray} />
-                <Text style={[styles.navText, { color: activeTab === 'chat' ? assets.basic.blue : assets.basic.darkGray }]}>
-                    Ask AI
+                <Brain size={20} color={activeTab === 'chat' ? assets.basic.main : assets.basic.darkGray} />
+                <Text style={[styles.navText, { color: activeTab === 'chat' ? assets.basic.main : assets.basic.darkGray }]}>
+                    aevum
+                </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity
+                onPress={() => onTabChange('chat')}
+                style={styles.navButton}
+            >
+                <Settings size={20} color={activeTab === 'settings' ? assets.basic.main : assets.basic.darkGray} />
+                <Text style={[styles.navText, { color: activeTab === 'settings' ? assets.basic.main : assets.basic.darkGray }]}>
+                    settings
                 </Text>
             </TouchableOpacity>
         </View>

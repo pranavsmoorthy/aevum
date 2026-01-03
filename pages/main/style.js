@@ -15,13 +15,13 @@ export const styleJSON = () => ({
     },
     headerTitle: {
         fontSize: 24,
-        color: assets.basic.blue,
         fontFamily: assets.basic.fonts.RALEWAY_BOLD,
+        color: assets.basic.main
     },
     headerSubtitle: {
         fontSize: 12,
         color: '#9ca3af',
-        fontFamily: assets.basic.fonts.RALEVAY_LIGHT,
+        fontFamily: assets.basic.fonts.RALEWAY_LIGHT,
         marginLeft: 1.5
     },
     addButton: {

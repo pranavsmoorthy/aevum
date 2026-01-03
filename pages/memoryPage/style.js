@@ -23,7 +23,7 @@ export const styleJSON = () => ({
         paddingHorizontal: 20,
         fontSize: 16,
         color: assets.basic.darkGray,
-        fontFamily: assets.basic.fonts.RALEVAY_LIGHT,
+        fontFamily: assets.basic.fonts.RALEWAY_LIGHT,
         borderWidth: 1,
         borderColor: '#e5e7eb',
     },
@@ -48,7 +48,7 @@ export const styleJSON = () => ({
     noMemoryText: {
         fontSize: 16,
         color: '#9ca3af',
-        fontFamily: assets.basic.fonts.RALEVAY_LIGHT,
+        fontFamily: assets.basic.fonts.RALEWAY_LIGHT,
         marginTop: 16,
         textAlign: 'center',
     },

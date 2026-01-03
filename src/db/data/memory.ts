@@ -1,9 +1,10 @@
 import { Model } from '@nozbe/watermelondb'
-import { field, text } from '@nozbe/watermelondb/decorators'
+import { field } from '@nozbe/watermelondb/decorators'
 
 export default class Memory extends Model {
-    static table = 'memories';
+  static table = 'memories'
 
-    @text('description') description: string;
-    @field('year') year: number | null;
+  @field('title') title?: string
+  @field('description') description!: string
+  @field('year') year!: number | null
 }

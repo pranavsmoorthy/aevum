@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import { Plus } from 'lucide-react-native';
 import * as NavigationBar from 'expo-navigation-bar';
+import { getAllMemories } from '../../src/db/dbController';
 
 import AssistantPage from '../assistantPage';
 import MemoryPage from '../memoryPage';
@@ -17,6 +18,7 @@ import { assets } from '../../assets/assets';
 import { styleJSON } from './style.js';
 
 import "../../global.css"
+import GradientText from '../../components/GradientText';
 
 const appStyles = StyleSheet.create(styleJSON());
 
@@ -24,13 +26,24 @@ export default function App() {
     const [activeTab, setActiveTab] = useState('chat'); // 'memories' or 'chat'
     const [showAddModal, setShowAddModal] = useState(false);
     const [refreshTrigger, setRefreshTrigger] = useState(0);
+    const [memoriesCount, setMemoriesCount] = useState(0);
+
+    const fetchMemoriesCount = async () => {
+        const memories = await getAllMemories();
+        setMemoriesCount(memories.length);
+    }
 
     useEffect(() => {
         if (Platform.OS === 'android') {
             NavigationBar.setBackgroundColorAsync('#ffffff');
             NavigationBar.setButtonStyleAsync('dark');
         }
+        fetchMemoriesCount();
     }, []);
+
+    useEffect(() => {
+        fetchMemoriesCount();
+    }, [refreshTrigger]);
 
     const handleTabChange = (tab: string) => {
         setActiveTab(tab);
@@ -39,17 +52,15 @@ export default function App() {
         }
     }
 
-    const memories = 0;
-
     return (
         <View style={{ flex: 1, backgroundColor: assets.basic.mediumGray }}>
             <View style={appStyles.header}>
                 <View>
-                    <Text style={appStyles.headerTitle}>
-                        {activeTab === 'memories' ? 'Timeline' : 'aevum AI'}
-                    </Text>
+                    <GradientText style={appStyles.headerTitle}>
+                        {activeTab === 'memories' ? 'Timeline' : 'aevum'}
+                    </GradientText>
                     <Text style={appStyles.headerSubtitle}>
-                        {activeTab === 'memories' ? memories + ` memories stored` : 'Ask about your past'}
+                        {activeTab === 'memories' ? memoriesCount + ` memories stored` : 'Ask about your past'}
                     </Text>
                 </View>
                 {activeTab === 'memories' && (
@@ -57,7 +68,7 @@ export default function App() {
                         onPress={() => setShowAddModal(true)}
                         style={appStyles.addButton}
                     >
-                        <Plus size={20} color={assets.basic.blue} />
+                        <Plus size={20} color={assets.basic.main} />
                     </TouchableOpacity>
                 )}
             </View>

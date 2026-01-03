@@ -21,6 +21,7 @@ const redactor = new SyncRedactor({
 const styles = StyleSheet.create(styleJSON());
 
 const AddMemoryModal = ({ onClose, onAdd }) => {
+  const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [year, setYear] = useState('');
   const [error, setError] = useState('');
@@ -45,7 +46,7 @@ const AddMemoryModal = ({ onClose, onAdd }) => {
     }
 
     try {
-      await createMemory(description, yearNum);
+      await createMemory(description, yearNum, title);
       onAdd();
       onClose();
     } catch (e) {
@@ -65,6 +66,14 @@ const AddMemoryModal = ({ onClose, onAdd }) => {
         </View>
 
         <View style={styles.form}>
+          <Text style={styles.label}>Title (Optional)</Text>
+          <TextInput
+            style={styles.input}
+            placeholder="e.g., Summer Vacation"
+            value={title}
+            onChangeText={setTitle}
+          />
+
           <Text style={styles.label}>Description</Text>
           <TextInput
             style={[styles.input, styles.descriptionInput]}

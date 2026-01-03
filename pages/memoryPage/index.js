@@ -26,6 +26,7 @@ export default function MemoryPage({ refreshTrigger }) {
     return memories.filter(memory => {
       const searchLower = searchQuery.toLowerCase();
       return (
+        (memory.title && memory.title.toLowerCase().includes(searchLower)) ||
         memory.description.toLowerCase().includes(searchLower) ||
         memory.year.toString().includes(searchQuery)
       );
@@ -81,6 +82,7 @@ export default function MemoryPage({ refreshTrigger }) {
           [...filteredMemories].reverse().map((memory) => (
             <DbItem
               key={memory.id}
+              title={memory.title}
               text={memory.description}
               year={memory.year}
               id={memory.id}

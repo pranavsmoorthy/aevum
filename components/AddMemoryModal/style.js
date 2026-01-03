@@ -33,7 +33,7 @@ export const styleJSON = () => ({
     },
     title: {
         fontSize: 24,
-        fontWeight: 'bold',
+        fonteight: 'bold',
         color: '#1f2937',
         fontFamily: assets.basic.fonts.RALEWAY_BOLD,
     },
@@ -45,7 +45,6 @@ export const styleJSON = () => ({
     },
     label: {
         fontSize: 12,
-        fontWeight: '600',
         color: '#4b5563',
         textTransform: 'uppercase',
         marginBottom: 8,
@@ -60,13 +59,13 @@ export const styleJSON = () => ({
         borderWidth: 1,
         borderColor: '#d1d5db',
         marginBottom: 16,
-        fontFamily: assets.basic.fonts.RALEVAY_LIGHT,
+        fontFamily: assets.basic.fonts.RALEWAY_LIGHT,
     },
     descriptionInput: {
         height: 120,
     },
     saveButton: {
-        backgroundColor: assets.basic.blue,
+        backgroundColor: assets.basic.main,
         padding: 16,
         borderRadius: 8,
         alignItems: 'center',
