@@ -25,7 +25,7 @@ export const styleJSON = () => ({
         marginLeft: 1.5
     },
     addButton: {
-        backgroundColor: '#eff6ff',
+        backgroundColor: '#f6efffff',
         padding: 8,
         borderRadius: 999,
     }

@@ -54,15 +54,24 @@ export default function SettingsPage({ onMemoriesCleared }) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Settings</Text>
+            <View style={styles.settingsCard}>
+                <Text style={styles.aboutHeader}>About Aevum</Text>
+                <Text style={styles.aboutParagraph}>
+                    Aevum is your personal memory assistant. It helps you create, view, and manage your memories, and interact with an AI assistant to recall important details.
+                </Text>
+            </View>
+            
+            <View style={styles.settingsCard}>
+                <Text style={styles.aboutHeader}>Stored Info</Text>
+                
+                <TouchableOpacity style={styles.button} onPress={handleClearChat}>
+                    <Text style={styles.buttonText}>Clear Chat History</Text>
+                </TouchableOpacity>
 
-            <TouchableOpacity style={styles.button} onPress={handleClearChat}>
-                <Text style={styles.buttonText}>Clear Chat History</Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity style={styles.button} onPress={handleClearMemories}>
-                <Text style={styles.buttonText}>Clear All Memories</Text>
-            </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={handleClearMemories}>
+                    <Text style={styles.buttonText}>Clear All Memories</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 }

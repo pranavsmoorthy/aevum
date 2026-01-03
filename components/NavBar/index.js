@@ -23,8 +23,8 @@ const NavBar = ({ activeTab, onTabChange }) => {
                 onPress={() => onTabChange('chat')}
                 style={styles.navButton}
             >
-                <Brain size={20} color={activeTab === 'chat' ? assets.basic.main : assets.basic.darkGray} />
-                <Text style={[styles.navText, { color: activeTab === 'chat' ? assets.basic.main : assets.basic.darkGray }]}>
+                <Brain size={25} color={activeTab === 'chat' ? assets.basic.main : assets.basic.darkGray} />
+                <Text style={[styles.navTextAevum, { color: activeTab === 'chat' ? assets.basic.main : assets.basic.darkGray }]}>
                     aevum
                 </Text>
             </TouchableOpacity>
