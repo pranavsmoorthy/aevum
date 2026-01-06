@@ -1,12 +1,15 @@
 import { assets } from '../../assets/assets';
 
 export const styleJSON = () => ({
-    container: {
+    scrollWrapper: {
         flex: 1,
         backgroundColor: assets.basic.mediumGray,
+    },
+    container: {
         alignItems: 'center',
         justifyContent: 'flex-start',
         paddingTop: 20,
+        width: '100%',
     },
     aboutHeader: {
         fontSize: 24,
