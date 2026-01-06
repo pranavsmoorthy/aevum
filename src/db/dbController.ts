@@ -2,7 +2,7 @@ import { memoryCollection, chatMessageCollection } from './data'
 import Memory from './data/memory'
 import ChatMessage from './data/chatMessage'
 
-export async function createMemory(description: string, date: number, title?: string) {
+export async function createMemory(description: string, date: number, title?: string, image_uri?: string) {
     return memoryCollection.database.write(async () => {
         const year = new Date(date).getFullYear();
         return memoryCollection.create(memory => {
@@ -10,6 +10,7 @@ export async function createMemory(description: string, date: number, title?: st
             memory.description = description
             memory.year = year
             memory.date = date
+            if (image_uri) memory.image_uri = image_uri
         })
     })
 }
@@ -54,11 +55,12 @@ export async function deleteAllMemories() {
     })
 }
 
-export async function createChatMessage(sender: 'user' | 'ai', text: string) {
+export async function createChatMessage(sender: 'user' | 'ai', text: string, image_uri?: string) {
     return chatMessageCollection.database.write(async () => {
         return chatMessageCollection.create(message => {
             message.sender = sender
             message.text = text
+            if (image_uri) message.image_uri = image_uri
         })
     })
 }

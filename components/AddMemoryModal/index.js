@@ -6,9 +6,11 @@ import {
   TouchableOpacity,
   StyleSheet,
   Platform,
+  Image,
 } from 'react-native';
 import { X } from 'lucide-react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
+import * as ImagePicker from 'expo-image-picker';
 import { createMemory } from '../../src/db/dbController';
 import { assets } from '../../assets/assets';
 import { styleJSON } from './style.js';
@@ -24,8 +26,22 @@ const AddMemoryModal = ({ onClose, onAdd }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [date, setDate] = useState(new Date());
+  const [image, setImage] = useState(null);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [error, setError] = useState('');
+
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
 
   const handleAddMemory = async () => {
     if (!description.trim()) {
@@ -40,7 +56,7 @@ const AddMemoryModal = ({ onClose, onAdd }) => {
     }
 
     try {
-      await createMemory(description, date.getTime(), title);
+      await createMemory(description, date.getTime(), title, image);
       onAdd();
       onClose();
     } catch (e) {
@@ -99,6 +115,12 @@ const AddMemoryModal = ({ onClose, onAdd }) => {
               onChange={onDateChange}
             />
           )}
+
+          <TouchableOpacity style={styles.input} onPress={pickImage}>
+            <Text style={{color: "black"}}>Add Image</Text>
+          </TouchableOpacity>
+          {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+
 
           {error ? <Text style={styles.errorText}>{error}</Text> : null}
 

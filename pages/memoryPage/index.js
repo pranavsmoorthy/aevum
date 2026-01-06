@@ -88,6 +88,7 @@ export default function MemoryPage({ refreshTrigger }) {
               text={memory.description}
               year={memory.year}
               date={memory.date}
+              image_uri={memory.image_uri}
               id={memory.id}
               onRefresh={fetchMemories}
             />

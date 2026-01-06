@@ -8,4 +8,5 @@ export default class Memory extends Model {
   @field('description') description!: string
   @field('year') year?: number | null
   @field('date') date!: number
+  @field('image_uri') image_uri?: string | null
 }

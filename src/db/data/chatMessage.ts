@@ -6,5 +6,6 @@ export default class ChatMessage extends Model {
 
   @field('sender') sender!: 'user' | 'ai'
   @field('text') text!: string
+  @field('image_uri') image_uri?: string | null
   @readonly @date('created_at') createdAt!: Date
 }

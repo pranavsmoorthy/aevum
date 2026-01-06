@@ -1,11 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { deleteMemory } from '../../src/db/dbController';
 import { styleJSON } from './style';
 import { Calendar, Trash2 } from 'lucide-react-native';
 import { assets } from '../../assets/assets';
 
-const DbItem = ({ id, title, text, year, date, onRefresh }) => {
+const DbItem = ({ id, title, text, year, date, image_uri, onRefresh }) => {
     const displayDate = date ? new Date(date).toLocaleDateString() : year;
 
     return (
@@ -33,6 +33,12 @@ const DbItem = ({ id, title, text, year, date, onRefresh }) => {
             </View>
             {title ? <Text style={styles.title}>{title}</Text> : null}
             <Text style={styles.content}>{text}</Text>
+            {image_uri && (
+                <Image
+                    source={{ uri: image_uri }}
+                    style={{ width: 200, height: 200, borderRadius: 10, marginTop: 10 }}
+                />
+            )}
         </View>
     );
 };

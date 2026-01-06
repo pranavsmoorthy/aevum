@@ -36,6 +36,28 @@ export default schemaMigrations({
                     ]
                 })
             ]
+        },
+        {
+            toVersion: 5,
+            steps: [
+                addColumns({
+                    table: 'memories',
+                    columns: [
+                        { name: 'image_uri', type: 'string', isOptional: true },
+                    ]
+                })
+            ]
+        },
+        {
+            toVersion: 6,
+            steps: [
+                addColumns({
+                    table: 'chat_messages',
+                    columns: [
+                        { name: 'image_uri', type: 'string', isOptional: true },
+                    ]
+                })
+            ]
         }
     ],
 })

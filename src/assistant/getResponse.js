@@ -20,9 +20,21 @@ function findRelevantMemories(userPrompt, memory) {
     const relevantMemories = new Set();
 
     memory.forEach(mem => {
-        const lowerCaseMem = mem.toLowerCase();
+        const lowerCaseMem = mem.description.toLowerCase();
+        const lowerCaseTitle = mem.title ? mem.title.toLowerCase() : '';
+        const date = new Date(mem.date);
+        const year = date.getFullYear().toString();
+        const month = date.toLocaleString('default', { month: 'long' }).toLowerCase();
+        const day = date.getDate().toString();
+        const fullDate = date.toLocaleDateString().toLowerCase();
+
         for (const keyword of keywords) {
-            if (lowerCaseMem.includes(keyword)) {
+            if (lowerCaseMem.includes(keyword) || 
+                lowerCaseTitle.includes(keyword) ||
+                year.includes(keyword) ||
+                month.includes(keyword) ||
+                day.includes(keyword) ||
+                fullDate.includes(keyword)) {
                 relevantMemories.add(mem);
                 break;
             }
@@ -41,7 +53,7 @@ export default async function getGemmaSimulatedResponse(userPrompt, memories, ap
     if (relevantMemories.length > 0) {
         prompt = `The user asked: "${userPrompt}". Based on the following memories, provide a concise and helpful response. If the memories don't directly answer the question, state that you don't have enough information in your memory regarding that specific detail.
                 Memories:
-                ${relevantMemories.map(m => `- ${m}`).join('\n')}
+                ${relevantMemories.map(m => `- ${m.description} This happened on ${new Date(m.date).toLocaleDateString()}`).join('\n')}
                 Response:`;
     } else {
         prompt = `The user asked: "${userPrompt}". I do not have specific memories related to this topic. Please respond by stating that you don't have information on this topic in your memory.
@@ -58,15 +70,19 @@ export default async function getGemmaSimulatedResponse(userPrompt, memories, ap
             contents: prompt,
         });
 
-        if (response.candidates && response.candidates != 0) {
+        if (response.candidates && response.candidates.length > 0) {
             console.log(JSON.stringify(response.candidates));
-            return response.candidates[0].content.parts[0].text.trim();
+            const text = response.candidates[0].content.parts[0].text.trim();
+            if (relevantMemories.length > 0) {
+                return { text, memory: relevantMemories[0] };
+            }
+            return { text };
         } else {
             console.error("Unexpected API response structure:", result);
-            return "Sorry, I couldn't generate a response. The AI model returned an unexpected result.";
+            return { text: "Sorry, I couldn't generate a response. The AI model returned an unexpected result."};
         }
     } catch (error) {
         console.error("Error calling Gemini API for Gemma simulation:", error);
-        return "I'm sorry, I encountered an error trying to process your request. Please try again.";
+        return { text: "I'm sorry, I encountered an error trying to process your request. Please try again." };
     }
 }

@@ -5,7 +5,8 @@ import {
   View,
   ScrollView,
   Platform,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  Image,
 } from 'react-native';
 import { Brain } from 'lucide-react-native';
 
@@ -33,7 +34,7 @@ export default function AssistantPage() {
         setMessages([initialMessage]);
         await createChatMessage('ai', initialMessage.text);
       } else {
-        setMessages(dbMessages.map(m => ({ id: m.id, sender: m.sender, text: m.text })));
+        setMessages(dbMessages.map(m => ({ id: m.id, sender: m.sender, text: m.text, image_uri: m.image_uri })));
       }
     };
     loadMessages();
@@ -49,15 +50,14 @@ export default function AssistantPage() {
 
     const memories = await getAllMemories();
     console.log(memories)
-    const editedMemories = memories.map(m => `${m.description} This happened on ${new Date(m.date).toLocaleDateString()}`);
     
-    const gemmaResponse = await getGemmaSimulatedResponse(prompt, editedMemories, key);
+    const gemmaResponse = await getGemmaSimulatedResponse(prompt, memories, key);
     
-    await createChatMessage('ai', gemmaResponse);
-    const aiMsg = { id: Date.now() + 1, sender: 'ai', text: '' };
+    await createChatMessage('ai', gemmaResponse.text, gemmaResponse.memory?.image_uri);
+    const aiMsg = { id: Date.now() + 1, sender: 'ai', text: '', image_uri: gemmaResponse.memory?.image_uri };
     setMessages(prev => [...prev, aiMsg]);
 
-    for (let char of gemmaResponse) {
+    for (let char of gemmaResponse.text) {
         setMessages(prev => prev.map(msg => 
             msg.id === aiMsg.id ? { ...msg, text: msg.text + char } : msg
         ));
@@ -105,6 +105,12 @@ export default function AssistantPage() {
               <Text style={msg.sender === 'user' ? styles.userMessageText : styles.aiMessageText}>
                 {msg.text}
               </Text>
+              {msg.image_uri && (
+                <Image
+                  source={{ uri: msg.image_uri }}
+                  style={{ width: 200, height: 200, borderRadius: 10, marginTop: 10 }}
+                />
+              )}
             </View>
           </View>
         ))}
