@@ -17,7 +17,10 @@ export const assets = {
             RALEWAY_SEMIBOLD_ITALIC: "Raleway-SemiBoldItalic",
             RALEWAY_THIN: "Raleway-Thin",
             RALEWAY_THIN_ITALIC: "Raleway-ThinItalic",
-            COMFORTAA_MEDIUM: "Comfortaa-Medium"
+            COMFORTAA_MEDIUM: "Comfortaa-Medium",
+            FIRA_SANS_MEDIUM_ITALIC: "FiraSans-MediumItalic",
+            INTER_BOLD: "Inter-Bold",
+            INTER_BOLD_ITALIC: "Inter-BoldItalic"
         },
         main: "#4F46E5",
         darkMain: "#6B21A8",

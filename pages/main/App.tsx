@@ -36,7 +36,7 @@ export default function App() {
 
     useEffect(() => {
         if (Platform.OS === 'android') {
-            NavigationBar.setBackgroundColorAsync('#ffffff');
+            NavigationBar.setBackgroundColorAsync('transparent');
             NavigationBar.setButtonStyleAsync('dark');
         }
         fetchMemoriesCount();

@@ -53,7 +53,7 @@ export default async function getGemmaSimulatedResponse(userPrompt, memories, ap
     if (relevantMemories.length > 0) {
         prompt = `The user asked: "${userPrompt}". Based on the following memories, provide a concise and helpful response. If the memories don't directly answer the question, state that you don't have enough information in your memory regarding that specific detail.
                 Memories:
-                ${relevantMemories.map(m => `- ${m.description} This happened on ${new Date(m.date).toLocaleDateString()}`).join('\n')}
+                ${relevantMemories.map(m => `- ${m.title ? m.title + ": " : ""}${m.description} This happened on ${new Date(m.date).toLocaleDateString()}`).join('\n')}
                 Response:`;
     } else {
         prompt = `The user asked: "${userPrompt}". I do not have specific memories related to this topic. Please respond by stating that you don't have information on this topic in your memory.
